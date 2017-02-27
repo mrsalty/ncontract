@@ -1,5 +1,5 @@
 # ncontract
-test your rest webapi contracts 
+test against your rest webapi contracts quickly!
 
 ```C#
         [Test]
