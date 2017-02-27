@@ -7,7 +7,7 @@ test against your rest webapi contracts quickly!
         {
             var configuration = new RestApiClientConfigurationBuilder()
                 .WithBaseUri("www.yourapi.com")
-                .WithRequestUri("/version")
+                .WithRequestUri("/getmesomething")
                 .WithContentType("application/json")
                 .WithResponseContentType(ResponseContentType.String)
                 .WithHttpMethod(HttpMethod.Get)
