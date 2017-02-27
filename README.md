@@ -13,8 +13,9 @@ test against your rest webapi contracts quickly!
                 .WithHttpMethod(HttpMethod.Get)
                 .Build();
 
-            var result = RestApiClientFactory.Create(configuration).Invoke();
+            var result = RestApiClientFactory.Create(configuration).Invoke().Result;
 
-            Assert.AreEqual(HttpStatusCode.OK, result.Result.HttpResponseMessage.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, result.HttpResponseMessage.StatusCode);
+            Assert.AreEqual(request.id.ToString(), result.StringContent.id.Value);
         }
 ```
