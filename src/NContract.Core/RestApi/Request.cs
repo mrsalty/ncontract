@@ -29,7 +29,6 @@ namespace NContract.Core.RestApi
 
         public string RequestUri { get; private set; }
 
-
         public string Uri => $"{BaseUri}{RequestUri}";
 
         public string Body { get; private set; }

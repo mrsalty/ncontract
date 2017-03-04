@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using NContract.Core;
 using NContract.Core.RestApi;
 using Newtonsoft.Json.Linq;
@@ -47,18 +48,21 @@ namespace WebApi.Tests.Contract
         }
 
         [Test]
-        public void WhenInvokeGet_AndHeadersAreValid_Ok200StatusIsReturned2()
+        public void WhenInvokePost_AndHeadersAreValid_Ok200StatusIsReturned()
         {
+            dynamic model = new JObject();
+            model.name = "Matteo";
+
             var configuration = new RestApiClientConfigurationBuilder()
                 .WithBaseUri(_baseUri)
                 .WithRequestUri("/header")
-                .WithContentType("application/json")
-                .WithHeaders(new List<KeyValuePair<string, string>>()
+                .WithModel(model)
+                .WithHeaders(new RequestHeadersContainer()
                 {
-                    new KeyValuePair<string, string>("content-type", "application/json")
+                    Accept = new List<MediaTypeWithQualityHeaderValue>() { new MediaTypeWithQualityHeaderValue("application/json") }
                 })
                 .WithResponseContentType(ResponseContentType.NoContent)
-                .WithHttpMethod(HttpMethod.Get)
+                .WithHttpMethod(HttpMethod.Post)
                 .Build();
 
             var result = RestApiClientFactory.Create(configuration)

@@ -6,33 +6,32 @@ namespace NContract.Core.RestApi
 {
     public class RestApiInvocation
     {
+        private readonly RestApiClientConfiguration _clientConfiguration;
         private readonly HttpClientWrapper _httpClientHelper;
 
         public RestApiInvocation(HttpClientFactory httpClientFactory,
             RestApiClientConfiguration clientConfiguration)
         {
+            _clientConfiguration = clientConfiguration;
             _httpClientHelper = new HttpClientWrapper(httpClientFactory);
         }
-
-        public Request Request { get; private set; }
-
+        
         public InvocationResult InvocationResult { get; private set; }
 
-        public async Task<InvocationResult> Invoke(Request request)
+        public async Task<InvocationResult> Invoke(HttpMethod httpMethod)
         {
-            Request = request;
             HttpResponseMessage httpResponseMessage;
 
-            switch (request.HttpMethod.ToString().ToUpper())
+            switch (httpMethod.ToString().ToUpper())
             {
                 case "GET":
-                    httpResponseMessage = await _httpClientHelper.GetAsync(request.BaseUri, request.RequestUri, request.ContentType);
+                    httpResponseMessage = await _httpClientHelper.GetAsync(_clientConfiguration);
                     break;
                 case "POST":
-                    httpResponseMessage = await _httpClientHelper.PostAsync(request.StringContent, request.BaseUri, request.RequestUri, request.ContentType);
+                    httpResponseMessage = await _httpClientHelper.PostAsync(_clientConfiguration);
                     break;
                 case "PUT":
-                    httpResponseMessage = await _httpClientHelper.PutAsync(request.StringContent, request.BaseUri, request.RequestUri, request.ContentType);
+                    httpResponseMessage = await _httpClientHelper.PutAsync(_clientConfiguration);
                     break;
                 default:
                     throw new NotImplementedException();

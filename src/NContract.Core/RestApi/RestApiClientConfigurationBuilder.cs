@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -52,9 +53,9 @@ namespace NContract.Core.RestApi
             return this;
         }
 
-        public RestApiClientConfigurationBuilder WithHeaders(IEnumerable<KeyValuePair<string, string>> headers)
+        public RestApiClientConfigurationBuilder WithHeaders(RequestHeadersContainer headers)
         {
-            _restApiClientConfiguration.Headers = headers.ToList();
+            _restApiClientConfiguration.Headers = headers;
             return this;
         }
 
@@ -88,10 +89,6 @@ namespace NContract.Core.RestApi
             var serializedRequest = JsonConvert.SerializeObject(model);
 
             _restApiClientConfiguration.Content = new StringContent(serializedRequest, _restApiClientConfiguration.Encoding, _restApiClientConfiguration.ContentType);
-
-            if (_restApiClientConfiguration.Headers != null)
-                foreach (var header in _restApiClientConfiguration.Headers)
-                    _restApiClientConfiguration.Content.Headers.Add(header.Key, header.Value);
         }
 
         public RestApiClientConfiguration Build()

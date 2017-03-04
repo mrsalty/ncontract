@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace NContract.Core.RestApi
@@ -12,7 +13,7 @@ namespace NContract.Core.RestApi
 
         public object Model { get; set; }
 
-        public IList<KeyValuePair<string, string>> Headers { get; set; }
+        public RequestHeadersContainer Headers { get; set; }
 
         public string RequestUri { get; set; }
 

@@ -15,6 +15,7 @@ packages
 PrecompiledWeb
 core-only
 Release
+portable/*
 Artifacts
 LogFiles
 csx

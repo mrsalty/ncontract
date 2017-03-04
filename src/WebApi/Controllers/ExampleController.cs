@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -27,12 +29,12 @@ namespace WebApi.Controllers
 
         [Route("header")]
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost]
         public async Task<IHttpActionResult> GetWithHeadersAsync()
         {
-            if (!Request.Headers.Contains("content-type"))
+            if (Request.Headers.Accept.All(x => x.MediaType != "application/json"))
             {
-                return await Task.Run(() => BadRequest("content-type missing."));
+                return await Task.Run(() => BadRequest());
             };
 
             return await Task.Run(() => Ok());

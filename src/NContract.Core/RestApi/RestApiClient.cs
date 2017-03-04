@@ -40,36 +40,13 @@ namespace NContract.Core.RestApi
                 switch (_clientConfiguration.HttpMethod.Method.ToUpper())
                 {
                     case "GET":
-                        invocationResult = await apiInvocation.Invoke(new Request(
-                            HttpMethod.Get,
-                            _clientConfiguration.BaseUri,
-                            _clientConfiguration.RequestUri,
-                            _clientConfiguration?.Model?.ToString(),
-                            _clientConfiguration.ContentType,
-                            null,
-                            null));
+                        invocationResult = await apiInvocation.Invoke(HttpMethod.Get);
                         break;
                     case "POST":
-                        invocationResult = await apiInvocation.Invoke(
-                            new Request(
-                                HttpMethod.Post,
-                                _clientConfiguration.BaseUri,
-                                _clientConfiguration.RequestUri,
-                                string.Empty,
-                                _clientConfiguration.ContentType,
-                                _clientConfiguration.Content,
-                                null));
+                        invocationResult = await apiInvocation.Invoke(HttpMethod.Post);
                         break;
                     case "PUT":
-                        invocationResult = await apiInvocation.Invoke(
-                            new Request(
-                                HttpMethod.Put, 
-                                _clientConfiguration.BaseUri, 
-                                _clientConfiguration.RequestUri,
-                                string.Empty, 
-                                _clientConfiguration.ContentType, 
-                                _clientConfiguration.Content, 
-                                null));
+                        invocationResult = await apiInvocation.Invoke(HttpMethod.Put);
                         break;
                     default:
                         throw new NotImplementedException();

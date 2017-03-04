@@ -68,15 +68,15 @@ namespace NContract.Core
                 reportHtml += $"<li><h2 class=\"{test.ResultStatus.ToString().ToLower()}\">{test.Name}</h2>";
                 foreach (var invoke in test.ApiInvocations)
                 {
-                    reportHtml += "<p><strong>Request</string></br>";
-                    reportHtml += $"Method:{invoke.Request.HttpMethod}</br>";
-                    reportHtml += $"Uri:{invoke.Request.Uri}</br>";
-                    reportHtml += $"Body:{invoke.Request?.Body}</br>";
-                    if (invoke.Request?.Headers != null)
-                        foreach (var header in invoke.Request.Headers)
-                            reportHtml += $"\t{header.Key}:{header.Value}</br>";
-                    reportHtml += "</p>";
-                    reportHtml += "<p><strong>Response</strong></br>";
+                    //reportHtml += "<p><strong>Request</string></br>";
+                    //reportHtml += $"Method:{invoke.Request.HttpMethod}</br>";
+                    //reportHtml += $"Uri:{invoke.Request.Uri}</br>";
+                    //reportHtml += $"Body:{invoke.Request?.Body}</br>";
+                    //if (invoke.Request?.Headers != null)
+                    //    foreach (var header in invoke.Request.Headers)
+                    //        reportHtml += $"\t{header.Key}:{header.Value}</br>";
+                    //reportHtml += "</p>";
+                    //reportHtml += "<p><strong>Response</strong></br>";
                 }
                 reportHtml += $"<tr><td>Result:{test.ResultStatus}</br>";
                 reportHtml += $"<tr><td>Execution time:{test.ExecutionTime.ToString("h'h 'm'm 's's'")}</p>";
