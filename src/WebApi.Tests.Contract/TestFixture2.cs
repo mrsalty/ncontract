@@ -12,11 +12,11 @@ using NUnit.Framework;
 namespace WebApi.Tests.Contract
 {
     [TestFixture]
-    public class ApiContractTests : ContractTestBase
+    public class TestFixture2 : ContractTestBase
     {
         private readonly string _baseUri;
 
-        public ApiContractTests()
+        public TestFixture2()
         {
             _baseUri = ConfigurationManager.AppSettings["TestEndpoint"];
         }
@@ -27,7 +27,7 @@ namespace WebApi.Tests.Contract
         }
 
         [Test]
-        public void WhenInvokeGet_Ok200StatusIsReturned()
+        public async void WhenInvokeGet_Ok200StatusIsReturned2()
         {
             var configuration = new RestApiClientConfigurationBuilder()
                 .WithBaseUri(_baseUri)
@@ -37,13 +37,11 @@ namespace WebApi.Tests.Contract
                 .WithHttpMethod(HttpMethod.Get)
                 .Build();
 
-            if (RestApiClientFactory != null)
-            {
-                var result = RestApiClientFactory.Create(configuration)
-                    .Invoke();
+            var client = RestApiClientFactory.Create(configuration);
 
-                Assert.AreEqual(HttpStatusCode.OK, result.Result.HttpResponseMessage.StatusCode);
-            }
+            var result = await client.Invoke();
+
+            Assert.AreEqual(HttpStatusCode.OK, result.HttpResponseMessage.StatusCode);
         }
 
         [Test]
@@ -71,7 +69,7 @@ namespace WebApi.Tests.Contract
         }
 
         [Test]
-        public void WhenInvokePost_AndRequestIsValid_200OKStatusIsReturned()
+        public void WhenInvokePost_AndRequestIsValid_200OKStatusIsReturned2()
         {
             dynamic request = new JObject();
             request.name = "Matteo";
@@ -88,13 +86,13 @@ namespace WebApi.Tests.Contract
             var result = RestApiClientFactory.Create(configuration)
                 .Invoke().Result;
 
-            Assert.AreEqual(HttpStatusCode.OK,  result.HttpResponseMessage.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, result.HttpResponseMessage.StatusCode);
             Assert.AreEqual(request.name.Value, result.StringContent.name.Value);
             Assert.DoesNotThrow(() => Guid.Parse(result.StringContent.id.Value));
         }
 
         [Test]
-        public void WhenInvokePost_AndRequestIsNotValid_Then403BadRequestStatusIsReturned()
+        public void WhenInvokePost_AndRequestIsNotValid_Then403BadRequestStatusIsReturned2()
         {
             var configuration = new RestApiClientConfigurationBuilder()
                 .WithBaseUri(_baseUri)
@@ -109,11 +107,11 @@ namespace WebApi.Tests.Contract
                 .Invoke();
 
             Assert.AreEqual(HttpStatusCode.BadRequest, result.Result.HttpResponseMessage.StatusCode);
-            //Assert.AreEqual("Invalid request", result.Result.StringContent.message.ToString());
+            Assert.AreEqual("Invalid request", result.Result.StringContent.message.ToString());
         }
 
         [Test]
-        public void WhenInvokePut_AndRequestIsValid_200OKStatusIsReturned()
+        public void WhenInvokePut_AndRequestIsValid_200OKStatusIsReturned2()
         {
             dynamic request = new JObject();
             request.id = Guid.NewGuid();
@@ -136,7 +134,7 @@ namespace WebApi.Tests.Contract
         }
 
         [Test]
-        public void WhenInvokePut_AndRequestIsNotValid_403BadRequestStatusIsReturned()
+        public void WhenInvokePut_AndRequestIsNotValid_403BadRequestStatusIsReturned2()
         {
             dynamic request = new JObject();
             request.id = Guid.Empty;

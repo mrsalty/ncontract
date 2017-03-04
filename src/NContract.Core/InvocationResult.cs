@@ -6,8 +6,12 @@ namespace NContract.Core
 {
     public class InvocationResult
     {
-        public InvocationResult(HttpResponseMessage httpResponseMessage, ResponseContentType responseContentType)
+        public InvocationResult(
+            RestApiClientConfiguration restApiClientConfiguration,
+            HttpResponseMessage httpResponseMessage, 
+            ResponseContentType responseContentType)
         {
+            RestApiClientConfiguration = restApiClientConfiguration;
             HttpResponseMessage = httpResponseMessage;
             switch (responseContentType)
             {
@@ -22,8 +26,10 @@ namespace NContract.Core
                     break;
             }
         }
-
+        
         public HttpResponseMessage HttpResponseMessage { get; private set; }
+
+        public RestApiClientConfiguration RestApiClientConfiguration { get; private set; }
 
         public dynamic StringContent { get; set; }
 

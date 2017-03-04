@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using NContract.Core.RestApi;
 using NUnit.Framework;
 

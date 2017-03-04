@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NContract.Core
 {
@@ -9,8 +11,11 @@ namespace NContract.Core
         public IReadOnlyCollection<ContractTest> ContractTests => _contractTests.AsReadOnly();
         public RunningStatus RunningStatus { get; set; }
 
+        public Guid Id { get; private set; }
+
         public ContractTestFixture()
         {
+            Id = Guid.NewGuid();
             RunningStatus = RunningStatus.Started;
             _contractTests = new List<ContractTest>();
         }
@@ -23,6 +28,7 @@ namespace NContract.Core
         public void TearDown()
         {
             RunningStatus = RunningStatus.Done;
+            Runner.Instance.WriteFixtureReport(Id);
         }
     }
 }

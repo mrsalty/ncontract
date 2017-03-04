@@ -55,7 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContractTestResultStatus.cs" />
-    <Compile Include="RestApi\Request.cs" />
+    <Compile Include="ReportTextWriter.cs" />
+    <Compile Include="RestApi\MediaTypeWithQualityHeaderValueExtensions.cs" />
     <Compile Include="RestApi\RequestHeadersContainer.cs" />
     <Compile Include="RestApi\RestApiInvocation.cs" />
     <Compile Include="ContractTest.cs" />

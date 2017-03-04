@@ -37,7 +37,9 @@ namespace NContract.Core.RestApi
                     throw new NotImplementedException();
             }
 
-            return new InvocationResult(httpResponseMessage, ResponseContentType.String);
+            InvocationResult = new InvocationResult(_clientConfiguration, httpResponseMessage, ResponseContentType.String);
+
+            return InvocationResult;
         }
     }
 }
