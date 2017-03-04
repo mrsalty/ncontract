@@ -42,3 +42,7 @@ test against your rest webapi contracts quickly!
             Assert.AreEqual(HttpStatusCode.OK, result.Result.HttpResponseMessage.StatusCode);
         }
 ```
+
+NContract will generate a report for each run
+
+![Alt text](/report1.png?raw=true "NContract report example")

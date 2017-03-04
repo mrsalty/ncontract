@@ -47,7 +47,7 @@ namespace WebApi.Tests.Contract
         public void WhenInvokePost_AndHeadersAreValid_Ok200StatusIsReturned()
         {
             dynamic model = new JObject();
-            model.name = "Matteo";
+            model.name = "John";
 
             var configuration = new RestApiClientConfigurationBuilder()
                 .WithBaseUri(_baseUri)
@@ -64,7 +64,7 @@ namespace WebApi.Tests.Contract
             var result = RestApiClientFactory.Create(configuration)
                 .Invoke();
 
-            Assert.AreEqual(HttpStatusCode.OK, result.Result.HttpResponseMessage.StatusCode);
+            Assert.AreEqual(HttpStatusCode.BadRequest, result.Result.HttpResponseMessage.StatusCode);
         }
 
         [Test]
