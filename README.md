@@ -17,4 +17,28 @@ test against your rest webapi contracts quickly!
 
             Assert.AreEqual(HttpStatusCode.OK, result.HttpResponseMessage.StatusCode);
         }
+		
+		[Test]
+        public void WhenInvokePost_AndHeadersAreValid_Ok200StatusIsReturned()
+        {
+            dynamic model = new JObject();
+            model.name = "Matteo";
+
+            var configuration = new RestApiClientConfigurationBuilder()
+                .WithBaseUri(_baseUri)
+                .WithRequestUri("/header")
+                .WithModel(model)
+                .WithHeaders(new RequestHeadersContainer()
+                {
+                    Accept = new List<MediaTypeWithQualityHeaderValue>() { new MediaTypeWithQualityHeaderValue("application/json") }
+                })
+                .WithResponseContentType(ResponseContentType.NoContent)
+                .WithHttpMethod(HttpMethod.Post)
+                .Build();
+
+            var result = RestApiClientFactory.Create(configuration)
+                .Invoke();
+
+            Assert.AreEqual(HttpStatusCode.OK, result.Result.HttpResponseMessage.StatusCode);
+        }
 ```
