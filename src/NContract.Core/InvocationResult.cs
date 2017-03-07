@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using NContract.Core.RestApi;
 using Newtonsoft.Json;
@@ -9,10 +10,12 @@ namespace NContract.Core
         public InvocationResult(
             RestApiClientConfiguration restApiClientConfiguration,
             HttpResponseMessage httpResponseMessage, 
-            ResponseContentType responseContentType)
+            ResponseContentType responseContentType,
+            DateTime invocationStartedUtc)
         {
             RestApiClientConfiguration = restApiClientConfiguration;
             HttpResponseMessage = httpResponseMessage;
+            InvocationStartedUtc = invocationStartedUtc;
             switch (responseContentType)
             {
                 case ResponseContentType.String:
@@ -25,14 +28,21 @@ namespace NContract.Core
                         httpResponseMessage.Content.ReadAsByteArrayAsync().Result;
                     break;
             }
+            InvocationEndedUtc = DateTime.UtcNow;
         }
-        
+
+        public DateTime InvocationEndedUtc { get; private set; }
+
         public HttpResponseMessage HttpResponseMessage { get; private set; }
+
+        public DateTime InvocationStartedUtc { get; }
 
         public RestApiClientConfiguration RestApiClientConfiguration { get; private set; }
 
         public dynamic StringContent { get; set; }
 
         public byte[] ByteContent { get; set; }
+
+        public TimeSpan InvocationTime => InvocationEndedUtc.Subtract(InvocationStartedUtc).Duration();
     }
 }

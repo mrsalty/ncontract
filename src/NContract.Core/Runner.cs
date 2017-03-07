@@ -7,6 +7,8 @@ namespace NContract.Core
     {
         private readonly List<ContractTestFixture> _contractTestFixtures;
 
+        public DateTime RunningTimeUtc { get; private set; }
+
         public IReadOnlyCollection<ContractTestFixture> ContractTestFixtures => _contractTestFixtures.AsReadOnly();
 
         private static readonly Lazy<Runner> Lazy = new Lazy<Runner>(() => new Runner());
@@ -15,12 +17,13 @@ namespace NContract.Core
 
         public RunningStatus RunningStatus { get; private set; }
 
-        public ReportTextWriter ReportTextWriter { get; private set; }
+        public ReportHtmlWriter ReportTextWriter { get; private set; }
 
         private Runner()
         {
-            ReportTextWriter = new ReportTextWriter();
-            ReportTextWriter.WriteHeader();
+            RunningTimeUtc = DateTime.UtcNow;
+
+            ReportTextWriter = new ReportHtmlWriter(RunningTimeUtc);
 
             RunningStatus = RunningStatus.Started;
 

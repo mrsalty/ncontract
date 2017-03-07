@@ -11,7 +11,7 @@ namespace NContract.Core
         public IReadOnlyCollection<ContractTest> ContractTests => _contractTests.AsReadOnly();
         public RunningStatus RunningStatus { get; set; }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; }
 
         public ContractTestFixture()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NContract.Core.RestApi
@@ -20,8 +21,8 @@ namespace NContract.Core.RestApi
 
         public async Task<InvocationResult> Invoke(HttpMethod httpMethod)
         {
+            DateTime invationStartedUtc = DateTime.UtcNow;
             HttpResponseMessage httpResponseMessage;
-
             switch (httpMethod.ToString().ToUpper())
             {
                 case "GET":
@@ -37,7 +38,7 @@ namespace NContract.Core.RestApi
                     throw new NotImplementedException();
             }
 
-            InvocationResult = new InvocationResult(_clientConfiguration, httpResponseMessage, ResponseContentType.String);
+            InvocationResult = new InvocationResult(_clientConfiguration, httpResponseMessage, ResponseContentType.String, invationStartedUtc);
 
             return InvocationResult;
         }

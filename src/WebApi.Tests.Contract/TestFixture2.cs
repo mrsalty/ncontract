@@ -27,7 +27,8 @@ namespace WebApi.Tests.Contract
         }
 
         [Test]
-        public async void WhenInvokeGet_Ok200StatusIsReturned2()
+        [Ignore]
+        public async void WhenInvokeGet_Ok200StatusIsReturnedIgnore()
         {
             var configuration = new RestApiClientConfigurationBuilder()
                 .WithBaseUri(_baseUri)

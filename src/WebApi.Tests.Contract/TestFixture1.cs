@@ -37,7 +37,41 @@ namespace WebApi.Tests.Contract
                 .WithHttpMethod(HttpMethod.Get)
                 .Build();
 
+            var result = RestApiClientFactory.Create(configuration).Invoke();
+
+            Assert.AreEqual(HttpStatusCode.OK, result.Result.HttpResponseMessage.StatusCode);
+        }
+
+        [Test]
+        public void WhenInvokeTwoApi_IShouldSee2Invocations()
+        {
+            var configuration = new RestApiClientConfigurationBuilder()
+                .WithBaseUri(_baseUri)
+                .WithRequestUri("/version")
+                .WithContentType("application/json")
+                .WithResponseContentType(ResponseContentType.String)
+                .WithHttpMethod(HttpMethod.Get)
+                .Build();
+
             var result = RestApiClientFactory.Create(configuration)
+                .Invoke();
+
+            dynamic model = new JObject();
+            model.name = "John";
+
+            var configuration2 = new RestApiClientConfigurationBuilder()
+                .WithBaseUri(_baseUri)
+                .WithRequestUri("/header")
+                .WithModel(model)
+                .WithHeaders(new RequestHeadersContainer()
+                {
+                    Accept = new List<MediaTypeWithQualityHeaderValue>() { new MediaTypeWithQualityHeaderValue("application/json") }
+                })
+                .WithResponseContentType(ResponseContentType.NoContent)
+                .WithHttpMethod(HttpMethod.Post)
+                .Build();
+
+            var result2 = RestApiClientFactory.Create(configuration2)
                 .Invoke();
 
             Assert.AreEqual(HttpStatusCode.OK, result.Result.HttpResponseMessage.StatusCode);
@@ -55,7 +89,9 @@ namespace WebApi.Tests.Contract
                 .WithModel(model)
                 .WithHeaders(new RequestHeadersContainer()
                 {
-                    Accept = new List<MediaTypeWithQualityHeaderValue>() { new MediaTypeWithQualityHeaderValue("application/json") }
+                    Accept = new List<MediaTypeWithQualityHeaderValue>() { new MediaTypeWithQualityHeaderValue("application/json") },
+                    AcceptEncoding = new List<StringWithQualityHeaderValue>() { new StringWithQualityHeaderValue("gzip") },
+                    AcceptCharset = new List<StringWithQualityHeaderValue>() { new StringWithQualityHeaderValue("utf-8") }
                 })
                 .WithResponseContentType(ResponseContentType.NoContent)
                 .WithHttpMethod(HttpMethod.Post)
@@ -113,7 +149,7 @@ namespace WebApi.Tests.Contract
         public void WhenInvokePut_AndRequestIsValid_200OKStatusIsReturned()
         {
             dynamic request = new JObject();
-            request.id = Guid.NewGuid();
+            request.id = Guid.NewGuid().ToString();
 
             var configuration = new RestApiClientConfigurationBuilder()
                 .WithBaseUri(_baseUri)

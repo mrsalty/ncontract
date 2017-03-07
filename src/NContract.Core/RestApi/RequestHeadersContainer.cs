@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Text;
@@ -13,10 +14,31 @@ namespace NContract.Core.RestApi
 
         public override string ToString()
         {
-            var headers= new StringBuilder();
-            foreach (var item in this.Accept)
+            var headers = new StringBuilder();
+            headers.AppendLine("Headers:");
+            //Accept
+            if (Accept != null)
             {
-                headers.Append(item.Display());
+                foreach (var item in Accept)
+                {
+                    headers.Append($"-{item.Display()}{Environment.NewLine}");
+                }
+            }
+            //AcceptCharset
+            if (AcceptCharset != null)
+            {
+                foreach (var item in this.AcceptCharset)
+                {
+                    headers.Append($"-AcceptCharset:{item}{Environment.NewLine}");
+                }
+            }
+            //AcceptEncoding
+            if (AcceptEncoding != null)
+            {
+                foreach (var item in AcceptEncoding)
+                {
+                    headers.Append($"-AcceptEncoding:{item}{Environment.NewLine}");
+                }
             }
             return headers.ToString();
         }

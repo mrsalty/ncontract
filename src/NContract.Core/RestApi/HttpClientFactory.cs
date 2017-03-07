@@ -20,7 +20,4 @@ namespace NContract.Core.RestApi
             return client;
         }
     }
-
-    public class RequestHeader : HttpHeaders
-    { }
 }

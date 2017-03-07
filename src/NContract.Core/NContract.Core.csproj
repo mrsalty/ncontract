@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContractTestResultStatus.cs" />
-    <Compile Include="ReportTextWriter.cs" />
+    <Compile Include="ReportHtmlWriter.cs" />
     <Compile Include="RestApi\MediaTypeWithQualityHeaderValueExtensions.cs" />
     <Compile Include="RestApi\RequestHeadersContainer.cs" />
     <Compile Include="RestApi\RestApiInvocation.cs" />
@@ -82,7 +82,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="normalize.css">
+    <Content Include="style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
