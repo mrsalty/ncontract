@@ -2,7 +2,9 @@
 test against your rest webapi contracts quickly!
 
 ```C#
-          [Test]
+	public class TestFixture1 : ContractTestBase
+    {
+        [Test]
         public void WhenInvokeGet_Ok200StatusIsReturned()
         {
             var configuration = new RestApiClientConfigurationBuilder()
@@ -17,31 +19,9 @@ test against your rest webapi contracts quickly!
 
             Assert.AreEqual(HttpStatusCode.OK, result.Result.HttpResponseMessage.StatusCode);
         }
-		
-		[Test]
-        public void WhenInvokePost_AndHeadersAreValid_Ok200StatusIsReturned()
-        {
-            dynamic model = new JObject();
-            model.name = "Matteo";
-
-            var configuration = new RestApiClientConfigurationBuilder()
-                .WithBaseUri(_baseUri)
-                .WithRequestUri("/header")
-                .WithModel(model)
-                .WithHeaders(new RequestHeadersContainer()
-                {
-                    Accept = new List<MediaTypeWithQualityHeaderValue>() { new MediaTypeWithQualityHeaderValue("application/json") }
-                })
-                .WithResponseContentType(ResponseContentType.NoContent)
-                .WithHttpMethod(HttpMethod.Post)
-                .Build();
-
-            var result = RestApiClientFactory.Create(configuration).Invoke();
-
-            Assert.AreEqual(HttpStatusCode.OK, result.Result.HttpResponseMessage.StatusCode);
-        }
+	}
 ```
 
-NContract will generate a report for each run
+It will generate an html report : 
 
-![Alt text](/report1.png?raw=true "NContract report example")
+<img src="/report1.png" alt="NContract html report" width="720" height="890">
