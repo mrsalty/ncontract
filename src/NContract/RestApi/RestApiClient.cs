@@ -48,6 +48,9 @@ namespace NContract.RestApi
                     case "PUT":
                         invocationResult = await apiInvocation.Invoke(HttpMethod.Put);
                         break;
+                    case "DELETE":
+                        invocationResult = await apiInvocation.Invoke(HttpMethod.Delete);
+                        break;
                     default:
                         throw new NotImplementedException();
                 }
@@ -69,12 +72,6 @@ namespace NContract.RestApi
 
         private void AfterInvoke()
         {
-            //_nContractConfiguration.CustomStringBuilder.AppendLine(string.Empty);
-            //_nContractConfiguration.CustomStringBuilder.AppendLine("RESPONSE");
-            //_nContractConfiguration.CustomStringBuilder.AppendLine(new string('-', 8));
-            //_nContractConfiguration.CustomStringBuilder.AppendLine($"Result status code : {InvocationResult.HttpResponseMessage.StatusCode}");
-            //_nContractConfiguration.CustomStringBuilder.AppendLine($"Result string content: {InvocationResult.StringContent ?? "NULL"}");
-            //_nContractConfiguration.CustomStringBuilder.AppendLine(string.Empty);
         }
     }
 }

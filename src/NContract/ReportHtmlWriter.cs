@@ -1,8 +1,10 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using NContract.RestApi;
+using Newtonsoft.Json;
 
 namespace NContract
 {
@@ -36,6 +38,8 @@ namespace NContract
 
             if (fixture != null)
             {
+                //var reportHtml = new StringBuilder();
+                //reportHtml.ToString()
                 var reportHtml = "<section>";
                 foreach (var test in fixture.ContractTests)
                 {
@@ -51,7 +55,7 @@ namespace NContract
                         reportHtml += $"Method:{invocation.InvocationResult.RestApiClientConfiguration.HttpMethod}<br/>";
                         reportHtml += $"Uri:{invocation.InvocationResult.RestApiClientConfiguration.BaseUri}{invocation.InvocationResult.RestApiClientConfiguration.RequestUri}<br/>";
                         if (invocation.InvocationResult.RestApiClientConfiguration.Model != null)
-                            reportHtml += $"Body:{invocation.InvocationResult.RestApiClientConfiguration.Model}<br/>";
+                            reportHtml += $"Body:<PRE class=\"code-json\">{JsonConvert.SerializeObject(invocation.InvocationResult.RestApiClientConfiguration.Model, Formatting.Indented)}</PRE><br/>";
                         //headers
                         if (invocation.InvocationResult.RestApiClientConfiguration.Headers != null)
                             reportHtml += $"{Regex.Replace(invocation.InvocationResult.RestApiClientConfiguration.Headers.ToString(), @"\r\n?|\n", "<br />")}";
@@ -59,7 +63,7 @@ namespace NContract
                         reportHtml += "<h4>Response</h4>";
                         reportHtml += $"HttpStatus:{invocation.InvocationResult.HttpResponseMessage.StatusCode}<br/>";
                         if (invocation.InvocationResult.RestApiClientConfiguration.ResponseContentType == ResponseContentType.String)
-                            reportHtml += $"Content:{invocation.InvocationResult.StringContent}<br/>";
+                            reportHtml += $"Content:<PRE class=\"code-json\">{JsonConvert.SerializeObject(invocation.InvocationResult.StringContent, Formatting.Indented)}</PRE><br/>";
                         reportHtml += $"Invocation reponse time:{invocation.InvocationResult.InvocationTime:c}ms<br/>";
                         reportHtml += "</li>";
                     }
@@ -88,11 +92,9 @@ html {
   -ms-text-size-adjust: 100%; 
   -webkit-text-size-adjust: 100%; 
 }
-
 body {
   margin: 10;
 }
-
 article,
 aside,
 footer,
@@ -101,7 +103,6 @@ nav,
 section {
   display: block;
 }
-
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
@@ -112,50 +113,44 @@ h2, h3, h4, h5 {
     margin: 0;
     padding: 0;
 }
-
 ul {
     margin-left:15px;
     margin-top: 5px;
     padding: 0;
 }
-
 li {
     margin: 0;
     padding: 5px;
 }
-
+.code-json {
+    background-color: antiquewhite;
+    padding : 3px;
+    font-size: 1.0em;   
+}
 .passed {
     font-size: 0.8em;
     background-color: forestgreen;
 }
-
 .failed {
     font-size: 0.8em;
     background-color: red;
 }
-
 .ignored {
     font-size: 0.8em;
     background-color: yellow;
 }
-
 summary {
     font-weight: bold;
 }
-
 details {
     padding: 0.1em;
 }
-
 .invocation-item {    
     font-size: 0.7em;
 }
-
 .fixture-results {
-    font-size: 0.7em;
-    
+    font-size: 0.7em;    
 }
-
 .invocation-title {
     text-decoration: underline;
 }";

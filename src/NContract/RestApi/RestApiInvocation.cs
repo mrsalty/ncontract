@@ -33,6 +33,9 @@ namespace NContract.RestApi
                 case "PUT":
                     httpResponseMessage = await _httpClientHelper.PutAsync(_clientConfiguration);
                     break;
+                case "DELETE":
+                    httpResponseMessage = await _httpClientHelper.DeleteAsync(_clientConfiguration);
+                    break;
                 default:
                     throw new NotImplementedException();
             }
