@@ -40,7 +40,7 @@ namespace NContract
             _runningTest.TearDown();
         }
 
-        public async Task<InvocationResult> ApiInvoke(RestApiClientConfiguration configuration)
+        public Task<InvocationResult> ApiInvoke(RestApiClientConfiguration configuration)
         {
             var restApiClient = _restApiClientFactory.Create(configuration);
 
@@ -48,7 +48,7 @@ namespace NContract
 
             _runningTest.ApiInvocations.Add(restApiInvocation);
 
-            return await restApiClient.Invoke(restApiInvocation);
+            return restApiClient.Invoke(restApiInvocation);
 
         }
     }

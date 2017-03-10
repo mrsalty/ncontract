@@ -45,6 +45,7 @@ namespace NContract
                 {
                     reportHtml += "<article><details>";
                     reportHtml += $"<summary class=\"{test.ResultStatus.ToString().ToLower()}\">{test.Name}</summary>";
+                    reportHtml += "<h5>Api invocations</h5>";
                     reportHtml += "<ol class=\"invocation-list\" type=\"1\">";
                     foreach (var invocation in test.ApiInvocations)
                     {
@@ -113,7 +114,7 @@ h2, h3, h4, h5 {
     margin: 5px 0 0 0;
     padding: 0;
 }
-ul {
+ol {
     margin-left:15px;
     margin-top: 5px;
     padding: 0;
