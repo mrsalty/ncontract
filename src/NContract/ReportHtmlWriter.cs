@@ -110,7 +110,7 @@ h1 {
 
 h2, h3, h4, h5 {
     font-weight: bold;
-    margin: 0;
+    margin: 5px 0 0 0;
     padding: 0;
 }
 ul {

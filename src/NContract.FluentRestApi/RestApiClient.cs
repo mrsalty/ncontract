@@ -7,18 +7,17 @@ namespace NContract.FluentRestApi
     public class RestApiClient
     {
         private readonly RestApiClientConfiguration _clientConfiguration;
-        private readonly HttpClientFactory _httpClientFactory;
 
         internal RestApiClient(
-            RestApiClientConfiguration clientConfiguration,
-            HttpClientFactory httpClientFactory)
+            RestApiClientConfiguration clientConfiguration)
         {
             _clientConfiguration = clientConfiguration;
-            _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<InvocationResult> Invoke()
+        public async Task<InvocationResult> Invoke(RestApiInvocation apiInvocation)
         {
+            InvocationResult invocationResult;
+
             if (_clientConfiguration.BaseUri == null)
             {
                 throw new ApplicationException("BaseUri is null");
@@ -26,12 +25,6 @@ namespace NContract.FluentRestApi
 
             try
             {
-                BeforeInvoke(_clientConfiguration.HttpMethod);
-
-                var apiInvocation = new RestApiInvocation(_httpClientFactory, _clientConfiguration);
-
-
-                InvocationResult invocationResult;
 
                 switch (_clientConfiguration.HttpMethod.Method.ToUpper())
                 {
@@ -50,24 +43,13 @@ namespace NContract.FluentRestApi
                     default:
                         throw new NotImplementedException();
                 }
-
-                AfterInvoke();
-
-                return invocationResult;
             }
             catch (Exception ex)
             {
                 //_nContractConfiguration.CustomStringBuilder.AppendLine(ex.ToString());
                 throw;
             }
-        }
-
-        private void BeforeInvoke(HttpMethod httpMethod)
-        {
-        }
-
-        private void AfterInvoke()
-        {
+            return invocationResult;
         }
     }
 }

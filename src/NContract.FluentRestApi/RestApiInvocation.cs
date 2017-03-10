@@ -7,13 +7,13 @@ namespace NContract.FluentRestApi
     public class RestApiInvocation
     {
         private readonly RestApiClientConfiguration _clientConfiguration;
-        private readonly HttpClientWrapper _httpClientHelper;
+        private readonly HttpClientWrapper _httpClientWrapper;
 
         public RestApiInvocation(HttpClientFactory httpClientFactory,
             RestApiClientConfiguration clientConfiguration)
         {
             _clientConfiguration = clientConfiguration;
-            _httpClientHelper = new HttpClientWrapper(httpClientFactory);
+            _httpClientWrapper = new HttpClientWrapper(httpClientFactory);
         }
         
         public InvocationResult InvocationResult { get; private set; }
@@ -25,16 +25,16 @@ namespace NContract.FluentRestApi
             switch (httpMethod.ToString().ToUpper())
             {
                 case "GET":
-                    httpResponseMessage = await _httpClientHelper.GetAsync(_clientConfiguration);
+                    httpResponseMessage = await _httpClientWrapper.GetAsync(_clientConfiguration);
                     break;
                 case "POST":
-                    httpResponseMessage = await _httpClientHelper.PostAsync(_clientConfiguration);
+                    httpResponseMessage = await _httpClientWrapper.PostAsync(_clientConfiguration);
                     break;
                 case "PUT":
-                    httpResponseMessage = await _httpClientHelper.PutAsync(_clientConfiguration);
+                    httpResponseMessage = await _httpClientWrapper.PutAsync(_clientConfiguration);
                     break;
                 case "DELETE":
-                    httpResponseMessage = await _httpClientHelper.DeleteAsync(_clientConfiguration);
+                    httpResponseMessage = await _httpClientWrapper.DeleteAsync(_clientConfiguration);
                     break;
                 default:
                     throw new NotImplementedException();

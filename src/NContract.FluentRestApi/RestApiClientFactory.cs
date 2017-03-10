@@ -4,7 +4,7 @@ namespace NContract.FluentRestApi
     {
         public RestApiClient Create(RestApiClientConfiguration restApiClientConfiguration)
         {
-            return new RestApiClient(restApiClientConfiguration, new HttpClientFactory());
+            return new RestApiClient(restApiClientConfiguration);
         }
     }
 }

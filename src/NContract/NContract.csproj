@@ -60,10 +60,8 @@
     <Compile Include="ContractTest.cs" />
     <Compile Include="ContractTestBase.cs" />
     <Compile Include="ContractTestFixture.cs" />
-    <Compile Include="CustomStringBuilder.cs" />
     <Compile Include="Runner.cs" />
     <Compile Include="RunningStatus.cs" />
-    <Compile Include="SignUpResRegistrationRequestBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

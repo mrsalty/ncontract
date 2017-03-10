@@ -21,10 +21,10 @@ namespace WebApi.Tests.Contract
                   .WithHttpMethod(HttpMethod.Get)
                   .Build();
 
-            var result = RestApiClientFactory.Create(configuration).Invoke();
+            var invocationResult = ApiInvoke(configuration);
 
-            Assert.AreEqual(HttpStatusCode.OK, result.Result.HttpResponseMessage.StatusCode);
-            Assert.IsNotNull(result.Result.StringContent);
+            Assert.AreEqual(HttpStatusCode.OK, invocationResult.Result.HttpResponseMessage.StatusCode);
+            Assert.IsNotNull(invocationResult.Result.StringContent);
         }
 
         [Test]
@@ -49,10 +49,10 @@ namespace WebApi.Tests.Contract
                   .WithHttpMethod(HttpMethod.Post)
                   .Build();
 
-            var result = RestApiClientFactory.Create(configuration).Invoke();
+            var invocationResult = ApiInvoke(configuration);
 
-            Assert.AreEqual(HttpStatusCode.Created, result.Result.HttpResponseMessage.StatusCode);
-            Assert.DoesNotThrow(() => Guid.Parse(result.Result.StringContent.orderId.Value));
+            Assert.AreEqual(HttpStatusCode.Created, invocationResult.Result.HttpResponseMessage.StatusCode);
+            Assert.DoesNotThrow(() => Guid.Parse(invocationResult.Result.StringContent.orderId.Value));
         }
 
         [Test]
@@ -78,10 +78,10 @@ namespace WebApi.Tests.Contract
                   .WithHttpMethod(HttpMethod.Post)
                   .Build();
 
-            var result = RestApiClientFactory.Create(configuration).Invoke().Result;
+            var invocationResult = ApiInvoke(configuration);
 
-            Assert.AreEqual(HttpStatusCode.Created, result.HttpResponseMessage.StatusCode);
-            var orderId = result.StringContent.orderId.Value;
+            Assert.AreEqual(HttpStatusCode.Created, invocationResult.Result.HttpResponseMessage.StatusCode);
+            var orderId = invocationResult.Result.StringContent.orderId.Value;
             Assert.DoesNotThrow(() => Guid.Parse(orderId));
 
             //update order
@@ -101,9 +101,9 @@ namespace WebApi.Tests.Contract
                   .WithHttpMethod(HttpMethod.Put)
                   .Build();
 
-            result = RestApiClientFactory.Create(configuration).Invoke().Result;
+            invocationResult = ApiInvoke(configuration);
 
-            Assert.AreEqual(HttpStatusCode.OK, result.HttpResponseMessage.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, invocationResult.Result.HttpResponseMessage.StatusCode);
 
             //Get order
             configuration = new RestApiClientConfigurationBuilder()
@@ -115,10 +115,10 @@ namespace WebApi.Tests.Contract
                   .WithHttpMethod(HttpMethod.Get)
                   .Build();
 
-            result = RestApiClientFactory.Create(configuration).Invoke().Result;
+            invocationResult = ApiInvoke(configuration);
 
-            Assert.AreEqual(HttpStatusCode.OK, result.HttpResponseMessage.StatusCode);
-            Assert.AreEqual(3, result.StringContent.pizzas.Count);
+            Assert.AreEqual(HttpStatusCode.OK, invocationResult.Result.HttpResponseMessage.StatusCode);
+            Assert.AreEqual(3, invocationResult.Result.StringContent.pizzas.Count);
         }
 
         [Test]
@@ -144,8 +144,8 @@ namespace WebApi.Tests.Contract
                   .WithHttpMethod(HttpMethod.Post)
                   .Build();
 
-            var result = RestApiClientFactory.Create(configuration).Invoke().Result;
-            var orderId = result.StringContent.orderId.Value;
+            var invocationResult = ApiInvoke(configuration);
+            var orderId = invocationResult.Result.StringContent.orderId.Value;
             Assert.DoesNotThrow(() => Guid.Parse(orderId));
 
             //delete it
@@ -157,9 +157,9 @@ namespace WebApi.Tests.Contract
                  .WithHttpMethod(HttpMethod.Delete)
                  .Build();
 
-            result = RestApiClientFactory.Create(configuration2).Invoke().Result;
+            invocationResult = ApiInvoke(configuration2);
 
-            Assert.AreEqual(HttpStatusCode.OK, result.HttpResponseMessage.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, invocationResult.Result.HttpResponseMessage.StatusCode);
         }
     }
 }
