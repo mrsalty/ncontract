@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NContract.RestApi
+namespace NContract.FluentRestApi
 {
     public class HttpClientWrapper : IDisposable
     {
@@ -53,7 +53,6 @@ namespace NContract.RestApi
 
         public async Task<HttpResponseMessage> GetAsync(RestApiClientConfiguration configuration)
         {
-
             using (var client = _httpClientFactory.Create(configuration.Headers))
             {
                 var request = new HttpRequestMessage()

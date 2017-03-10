@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace NContract.RestApi
+namespace NContract.FluentRestApi
 {
     public class RestApiClientConfigurationBuilder
     {

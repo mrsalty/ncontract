@@ -1,8 +1,8 @@
-# ncontract
+# NContract
 test against your rest webapi contracts quickly!
 
 ```C#
-	 [TestFixture]
+	[TestFixture]
     public class PizzeriaContractTests : ContractTestBase
     {
         [Test]
@@ -159,6 +159,6 @@ test against your rest webapi contracts quickly!
     }
 ```
 
-It will generate an html report : 
+It will generate this html report : 
 
 <img src="/report1.png" alt="NContract html report">

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using NContract;
-using NContract.RestApi;
+using NContract.FluentRestApi;
 using NUnit.Framework;
 
 namespace WebApi.Tests.Contract

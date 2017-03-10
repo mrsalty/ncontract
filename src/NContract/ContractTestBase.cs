@@ -1,4 +1,4 @@
-using NContract.RestApi;
+using NContract.FluentRestApi;
 using NUnit.Framework;
 
 namespace NContract
@@ -29,7 +29,7 @@ namespace NContract
             _runningTest = new ContractTest(TestContext.CurrentContext.Test.Name);
             _runningTest.SetUp();
             _contractTestFixture.AppendTest(_runningTest);
-            RestApiClientFactory = new RestApiClientFactory(_runningTest);
+            RestApiClientFactory = new RestApiClientFactory();
         }
 
         [TearDown]

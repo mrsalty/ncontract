@@ -1,4 +1,4 @@
-namespace NContract.RestApi
+namespace NContract.FluentRestApi
 {
     public enum ResponseContentType
     {

@@ -57,23 +57,11 @@
   <ItemGroup>
     <Compile Include="ContractTestResultStatus.cs" />
     <Compile Include="ReportHtmlWriter.cs" />
-    <Compile Include="RestApi\MediaTypeWithQualityHeaderValueExtensions.cs" />
-    <Compile Include="RestApi\RequestHeadersContainer.cs" />
-    <Compile Include="RestApi\RestApiInvocation.cs" />
     <Compile Include="ContractTest.cs" />
     <Compile Include="ContractTestBase.cs" />
     <Compile Include="ContractTestFixture.cs" />
     <Compile Include="CustomStringBuilder.cs" />
-    <Compile Include="RestApi\HttpClientFactory.cs" />
-    <Compile Include="RestApi\HttpClientWrapper.cs" />
-    <Compile Include="InvocationResult.cs" />
     <Compile Include="Runner.cs" />
-    <Compile Include="RestApi\ResponseContentType.cs" />
-    <Compile Include="RestApi\RestApiClient.cs" />
-    <Compile Include="RestApi\RestApiClientConfiguration.cs" />
-    <Compile Include="RestApi\RestApiClientConfigurationBuilder.cs" />
-    <Compile Include="RestApi\RestApiClientDefaultConfiguration.cs" />
-    <Compile Include="RestApi\RestApiClientFactory.cs" />
     <Compile Include="RunningStatus.cs" />
     <Compile Include="SignUpResRegistrationRequestBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +72,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NContract.FluentRestApi\NContract.FluentRestApi.csproj">
+      <Project>{240e54cd-e88b-4acd-8614-773f4b34d4e7}</Project>
+      <Name>NContract.FluentRestApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

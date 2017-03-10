@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Net.Http;
 
-namespace NContract.RestApi
+namespace NContract.FluentRestApi
 {
     public class HttpClientFactory
     {

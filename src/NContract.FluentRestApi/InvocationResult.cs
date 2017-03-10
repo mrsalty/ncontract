@@ -1,9 +1,8 @@
 using System;
 using System.Net.Http;
-using NContract.RestApi;
 using Newtonsoft.Json;
 
-namespace NContract
+namespace NContract.FluentRestApi
 {
     public class InvocationResult
     {

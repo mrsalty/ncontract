@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using NContract.RestApi;
+using NContract.FluentRestApi;
 using NUnit.Framework;
 
 namespace NContract

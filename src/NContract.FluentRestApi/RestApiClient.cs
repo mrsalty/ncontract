@@ -2,21 +2,18 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace NContract.RestApi
+namespace NContract.FluentRestApi
 {
     public class RestApiClient
     {
         private readonly RestApiClientConfiguration _clientConfiguration;
-        private readonly ContractTest _contractTest;
         private readonly HttpClientFactory _httpClientFactory;
 
         internal RestApiClient(
             RestApiClientConfiguration clientConfiguration,
-            ContractTest contractTest,
             HttpClientFactory httpClientFactory)
         {
             _clientConfiguration = clientConfiguration;
-            _contractTest = contractTest;
             _httpClientFactory = httpClientFactory;
         }
 
@@ -33,7 +30,6 @@ namespace NContract.RestApi
 
                 var apiInvocation = new RestApiInvocation(_httpClientFactory, _clientConfiguration);
 
-                _contractTest.ApiInvocations.Add(apiInvocation);
 
                 InvocationResult invocationResult;
 
