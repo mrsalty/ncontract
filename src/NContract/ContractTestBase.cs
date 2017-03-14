@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using NContract.FluentRestApi;
 using NUnit.Framework;
-using HttpClientFactory = NContract.FluentRestApi.HttpClientFactory;
 
 namespace NContract
 {
@@ -10,7 +9,6 @@ namespace NContract
     {
         private ContractTestFixture _contractTestFixture;
         private ContractTest _runningTest;
-        private RestApiClientFactory _restApiClientFactory;
         
         [TestFixtureSetUp]
         public void Init()
@@ -31,7 +29,6 @@ namespace NContract
             _runningTest = new ContractTest(TestContext.CurrentContext.Test.Name);
             _runningTest.SetUp();
             _contractTestFixture.AppendTest(_runningTest);
-            _restApiClientFactory = new RestApiClientFactory();
         }
 
         [TearDown]
@@ -40,16 +37,9 @@ namespace NContract
             _runningTest.TearDown();
         }
 
-        public Task<InvocationResult> ApiInvoke(RestApiClientConfiguration configuration)
+        public Task<InvocationResult> InvokeApi(RestApiClientConfiguration configuration)
         {
-            var restApiClient = _restApiClientFactory.Create(configuration);
-
-            var restApiInvocation = new RestApiInvocation(new HttpClientFactory(), configuration);
-
-            _runningTest.ApiInvocations.Add(restApiInvocation);
-
-            return restApiClient.Invoke(restApiInvocation);
-
+            return _runningTest.InvokeApi(configuration);
         }
     }
 }

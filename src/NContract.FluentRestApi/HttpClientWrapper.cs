@@ -10,13 +10,13 @@ namespace NContract.FluentRestApi
         private readonly HttpClientFactory _httpClientFactory;
         private HttpClient _client;
 
-        public Encoding DefaultEncoding => Encoding.UTF8;
-
         public HttpClientWrapper(HttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
 
+        public Encoding DefaultEncoding => Encoding.UTF8;
+        
         public async Task<HttpResponseMessage> PostAsync(RestApiClientConfiguration configuration)
         {
             using (_client = _httpClientFactory.Create(configuration.Headers))
@@ -64,7 +64,6 @@ namespace NContract.FluentRestApi
                 return await client.SendAsync(request);
             }
         }
-
 
         public void Dispose()
         {

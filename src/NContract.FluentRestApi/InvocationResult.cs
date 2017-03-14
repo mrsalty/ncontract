@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Net.Http;
 using Newtonsoft.Json;
 
@@ -15,19 +17,33 @@ namespace NContract.FluentRestApi
             RestApiClientConfiguration = restApiClientConfiguration;
             HttpResponseMessage = httpResponseMessage;
             InvocationStartedUtc = invocationStartedUtc;
-            switch (responseContentType)
-            {
-                case ResponseContentType.String:
-                    StringContent =
-                        JsonConvert.DeserializeObject<dynamic>(
-                            httpResponseMessage.Content.ReadAsStringAsync().Result);
-                    break;
-                case ResponseContentType.Byte:
-                    ByteContent =
-                        httpResponseMessage.Content.ReadAsByteArrayAsync().Result;
-                    break;
-            }
+            TryGetContent(httpResponseMessage, responseContentType);
             InvocationEndedUtc = DateTime.UtcNow;
+            Exceptions = new List<Exception>();
+        }
+
+        private void TryGetContent(HttpResponseMessage httpResponseMessage, ResponseContentType responseContentType)
+        {
+            try
+            {
+                switch (responseContentType)
+                {
+                    case ResponseContentType.String:
+                        StringContent =
+                            JsonConvert.DeserializeObject<dynamic>(
+                                httpResponseMessage.Content.ReadAsStringAsync().Result);
+                        break;
+                    case ResponseContentType.Byte:
+                        ByteContent =
+                            httpResponseMessage.Content.ReadAsByteArrayAsync().Result;
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Exceptions.Add(ex);
+                throw;
+            }
         }
 
         public DateTime InvocationEndedUtc { get; private set; }
@@ -43,5 +59,7 @@ namespace NContract.FluentRestApi
         public byte[] ByteContent { get; set; }
 
         public TimeSpan InvocationTime => InvocationEndedUtc.Subtract(InvocationStartedUtc).Duration();
+
+        public IList<Exception> Exceptions { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using NContract.FluentRestApi;
 using NUnit.Framework;
 
@@ -29,7 +30,7 @@ namespace NContract
 
         public string Name { get; private set; }
 
-        public IList<RestApiInvocation> ApiInvocations { get; private set; }
+        public IList<RestApiInvocation> ApiInvocations { get; }
 
         public ContractTestResultStatus ResultStatus { get; private set; }
 
@@ -51,6 +52,18 @@ namespace NContract
             ExecutionTime = _stopwatch.Elapsed;
             _stopwatch.Reset();
             ResultStatus = TestContext.CurrentContext.Result.Status.ToContractTestStatus();
+        }
+
+
+        public Task<InvocationResult> InvokeApi(RestApiClientConfiguration configuration)
+        {
+            var restApiClient = new RestApiClient(configuration);
+
+            var restApiInvocation = new RestApiInvocation(configuration);
+
+            ApiInvocations.Add(restApiInvocation);
+
+            return restApiClient.Invoke(restApiInvocation);
         }
     }
 }

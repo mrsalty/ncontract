@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -6,43 +7,51 @@ namespace NContract.FluentRestApi
 {
     public class RestApiInvocation
     {
-        private readonly RestApiClientConfiguration _clientConfiguration;
+        private readonly RestApiClientConfiguration _restApiClientConfiguration;
         private readonly HttpClientWrapper _httpClientWrapper;
 
-        public RestApiInvocation(HttpClientFactory httpClientFactory,
-            RestApiClientConfiguration clientConfiguration)
+        public RestApiInvocation(RestApiClientConfiguration restApiClientConfiguration)
         {
-            _clientConfiguration = clientConfiguration;
-            _httpClientWrapper = new HttpClientWrapper(httpClientFactory);
+            _restApiClientConfiguration = restApiClientConfiguration;
+            _httpClientWrapper = new HttpClientWrapper(new HttpClientFactory());
         }
         
         public InvocationResult InvocationResult { get; private set; }
 
         public async Task<InvocationResult> Invoke(HttpMethod httpMethod)
         {
-            DateTime invationStartedUtc = DateTime.UtcNow;
-            HttpResponseMessage httpResponseMessage;
-            switch (httpMethod.ToString().ToUpper())
+            var invationStartedUtc = DateTime.UtcNow;
+            try
             {
-                case "GET":
-                    httpResponseMessage = await _httpClientWrapper.GetAsync(_clientConfiguration);
-                    break;
-                case "POST":
-                    httpResponseMessage = await _httpClientWrapper.PostAsync(_clientConfiguration);
-                    break;
-                case "PUT":
-                    httpResponseMessage = await _httpClientWrapper.PutAsync(_clientConfiguration);
-                    break;
-                case "DELETE":
-                    httpResponseMessage = await _httpClientWrapper.DeleteAsync(_clientConfiguration);
-                    break;
-                default:
-                    throw new NotImplementedException();
+                HttpResponseMessage httpResponseMessage;
+                switch (httpMethod.ToString().ToUpper())
+                {
+                    case "GET":
+                        httpResponseMessage = await _httpClientWrapper.GetAsync(_restApiClientConfiguration);
+                        break;
+                    case "POST":
+                        httpResponseMessage = await _httpClientWrapper.PostAsync(_restApiClientConfiguration);
+                        break;
+                    case "PUT":
+                        httpResponseMessage = await _httpClientWrapper.PutAsync(_restApiClientConfiguration);
+                        break;
+                    case "DELETE":
+                        httpResponseMessage = await _httpClientWrapper.DeleteAsync(_restApiClientConfiguration);
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+
+                InvocationResult = new InvocationResult(_restApiClientConfiguration, httpResponseMessage,
+                    ResponseContentType.String, invationStartedUtc);
+
+                return InvocationResult;
             }
-
-            InvocationResult = new InvocationResult(_clientConfiguration, httpResponseMessage, ResponseContentType.String, invationStartedUtc);
-
-            return InvocationResult;
+            catch (AggregateException aex)
+            {
+                aex.InnerExceptions.ToList().ForEach(ex => InvocationResult.Exceptions.Add(ex));
+                throw;
+            }
         }
     }
 }

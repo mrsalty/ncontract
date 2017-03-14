@@ -56,7 +56,6 @@
     <Compile Include="RestApiClientConfiguration.cs" />
     <Compile Include="RestApiClientConfigurationBuilder.cs" />
     <Compile Include="RestApiClientDefaultConfiguration.cs" />
-    <Compile Include="RestApiClientFactory.cs" />
     <Compile Include="RestApiInvocation.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -66,6 +66,12 @@ namespace NContract
                         if (invocation.InvocationResult.RestApiClientConfiguration.ResponseContentType == ResponseContentType.String)
                             reportHtml += $"Content:<PRE class=\"code-json\">{JsonConvert.SerializeObject(invocation.InvocationResult.StringContent, Formatting.Indented)}</PRE><br/>";
                         reportHtml += $"Invocation reponse time:{invocation.InvocationResult.InvocationTime:c}ms<br/>";
+                        if (invocation.InvocationResult.Exceptions.Any())
+                        {
+                            reportHtml += "<h4>Exceptions</h4>";
+                            reportHtml = invocation.InvocationResult.Exceptions.Aggregate(reportHtml, (current, exception) => current + $"{exception}<br />");
+                        }
+
                         reportHtml += "</li>";
                     }
                     reportHtml += "</ol>";
@@ -115,12 +121,12 @@ h2, h3, h4, h5 {
     padding: 0;
 }
 ol {
-    margin-left:15px;
+    margin-left:5px;
     margin-top: 5px;
     padding: 0;
 }
 li {
-    margin: 0;
+    margin: 0 0 0 15px;
     padding: 5px;
 }
 .code-json {
