@@ -37,6 +37,9 @@ namespace NContract.FluentRestApi
                         ByteContent =
                             httpResponseMessage.Content.ReadAsByteArrayAsync().Result;
                         break;
+                    default:
+                        //TODO implement all
+                        throw new NotImplementedException();
                 }
             }
             catch (Exception ex)
