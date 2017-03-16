@@ -3,11 +3,7 @@ before_build:
 - cmd: >-
     nuget restore .\src\NContract.sln
 build:
-  publish_nuget: true
-  publish_nuget_symbols: true
-  include_nuget_references: true
-  verbosity: minimal
-  cmd: >-
+-  cmd: >-
     nuget pack -Version %APPVEYOR_BUILD_VERSION%.
 test: off
 deploy:
