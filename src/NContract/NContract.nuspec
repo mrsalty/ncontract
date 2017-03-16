@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>NContract</id>
-    <version>1.0.0</version>
+    <version>$version$</version>
     <authors>mrsalty</authors>
     <description>Test against your web api contracts with fun!</description>
     <copyright>Copyright mrsalty 2017</copyright>
