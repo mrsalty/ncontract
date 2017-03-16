@@ -1,0 +1,22 @@
+version: 0.0.{build}
+before_build:
+- cmd: >-
+    nuget restore .\src\NContract.FluentRestApi\packages.config -SolutionDirectory .\src
+    nuget restore .\src\Examples\WebApi\packages.config -SolutionDirectory .\src
+    nuget restore .\src\Examples\WebApi.IISHost\packages.config -SolutionDirectory .\src
+    nuget restore .\src\Examples\WebApi.Tests\packages.config -SolutionDirectory .\src
+build:
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  verbosity: minimal
+test: off
+    provider: NuGet
+    api_key:    qa3c76wngnspqk6w0hsofy21
+    secure: m49OJ7+Jdt9an3jPcTukHA==
+    skip_symbols: false
+    symbol_server:           # remove to push symbols to SymbolSource.org
+    artifact: /.*\.nupkg/
+
+
+
