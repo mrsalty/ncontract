@@ -1,11 +1,7 @@
 version: 0.0.{build}
 before_build:
 - cmd: >-
-    nuget restore .\src\NContract\packages.config -SolutionDirectory .\src
-    nuget restore .\src\NContract.FluentRestApi\packages.config -SolutionDirectory .\src
-    nuget restore .\src\Examples\WebApi\packages.config -SolutionDirectory .\src
-    nuget restore .\src\Examples\WebApi.IISHost\packages.config -SolutionDirectory .\src
-    nuget restore .\src\Examples\WebApi.Tests\packages.config -SolutionDirectory .\src
+    nuget restore .\src\NContract\packages.config -SolutionDirectory .\src\NContract.sln
 build:
   publish_nuget: true
   publish_nuget_symbols: true
