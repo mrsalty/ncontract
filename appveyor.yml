@@ -7,11 +7,13 @@ build:
   publish_nuget_symbols: true
   include_nuget_references: true
   verbosity: minimal
+- cmd: >-
+    nuget pack -Version %APPVEYOR_BUILD_VERSION%.
 test: off
 deploy:
     provider: NuGet
     api_key:    
-    secure: qa3c76wngnspqk6w0hsofy21
+        secure: qa3c76wngnspqk6w0hsofy21
     skip_symbols: false
     symbol_server:           # remove to push symbols to SymbolSource.org
     artifact: /.*\.nupkg/
