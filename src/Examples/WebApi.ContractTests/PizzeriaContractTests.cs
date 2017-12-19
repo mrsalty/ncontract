@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using NContract;
-using NContract.FluentRestApi;
+using FluentRestApi;
+using NContract.Nunit;
 using NUnit.Framework;
 
-namespace WebApi.Test.Contract
+namespace WebApi.ContractTests
 {
     [TestFixture]
     public class PizzeriaContractTests : ContractTestBase
     {
-        private const string BaseUri = "http://localhost:32769";
+        private const string BaseUri = "http://localhost:32770";
 
         [Test]
         public void WhenIGetAllOrders_IShouldReceiveAListOfOrders()
@@ -108,7 +108,6 @@ namespace WebApi.Test.Contract
                   .WithBaseUri(BaseUri)
                   .WithRequestUri($"/pizzeria/orders/{orderId}")
                   .WithContentType("application/json")
-                  .WithModel(updated)
                   .WithHttpMethod(HttpMethod.Get)
                   .Build();
 

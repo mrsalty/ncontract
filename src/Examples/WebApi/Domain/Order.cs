@@ -5,7 +5,6 @@ namespace WebApi.Domain
 {
     public class Order
     {
-
         public Guid TableId { get; }
 
         public Guid OrderId { get; }

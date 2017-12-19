@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace NContract.FluentRestApi
+namespace FluentRestApi
 {
     public static class RestApiClientDefaultConfiguration
     {

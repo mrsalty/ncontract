@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace NContract.FluentRestApi
+namespace FluentRestApi
 {
     public class RestApiClientConfigurationBuilder
     {
@@ -29,6 +29,8 @@ namespace NContract.FluentRestApi
         public RestApiClientConfigurationBuilder WithRequestUri(string requestUri)
         {
             requestUri = requestUri.Replace("//", "/");
+            if (requestUri.StartsWith("/"))
+                requestUri = requestUri.Remove(0, 1);
             _restApiClientConfiguration.RequestUri = requestUri;
             return this;
         }

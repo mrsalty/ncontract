@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NContract.FluentRestApi
+namespace FluentRestApi
 {
     public class HttpClientWrapper : IDisposable
     {
@@ -59,6 +59,7 @@ namespace NContract.FluentRestApi
                 {
                     RequestUri = new Uri($"{configuration.BaseUri}/{configuration.RequestUri}"),
                     Method = HttpMethod.Get,
+                    Content = configuration.Content
                 };
 
                 return await client.SendAsync(request);

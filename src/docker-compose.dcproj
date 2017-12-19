@@ -5,7 +5,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>d366f054-f97d-4c0b-b497-a804767ef98c</ProjectGuid>
     <DockerLaunchBrowser>True</DockerLaunchBrowser>
-    <DockerServiceUrl>http://localhost:{ServicePort}/api/values</DockerServiceUrl>
+    <DockerServiceUrl>http://localhost:32770/pizzeria/orders</DockerServiceUrl>
     <DockerServiceName>webapi</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

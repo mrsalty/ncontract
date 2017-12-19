@@ -1,12 +1,11 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using NContract.FluentRestApi;
+using FluentRestApi;
 using Newtonsoft.Json;
 
-namespace NContract
+namespace NContract.Nunit
 {
     public class ReportHtmlWriter
     {

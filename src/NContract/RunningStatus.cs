@@ -1,4 +1,4 @@
-namespace NContract
+namespace NContract.Nunit
 {
     public enum RunningStatus
     {

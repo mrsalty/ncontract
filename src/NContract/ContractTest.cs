@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using NContract.FluentRestApi;
+using FluentRestApi;
 using NUnit.Framework;
 
-namespace NContract
+namespace NContract.Nunit
 {
     public class ContractTest
     {

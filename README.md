@@ -2,8 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/89sltkcr0n6k04xl/branch/master?svg=true)](https://ci.appveyor.com/project/mrsalty/ncontract/branch/master)
 
-With NContract you can hit your REST web api in a fluent manner and verify results and contracts.
-NContract is built on top of NUnit so syntax and assertions of your tests will be familiar.
+With NContract you can hit your REST web api in a fluent manner and verify your API contracts.
 NContract generates an HTML report for each test run in the 'bin\NContract' folder of your test project so that you can integrate it in your CI build pipeline.
 
 ```C#

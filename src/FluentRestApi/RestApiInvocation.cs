@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace NContract.FluentRestApi
+namespace FluentRestApi
 {
     public class RestApiInvocation
     {

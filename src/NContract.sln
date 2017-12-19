@@ -3,19 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NContract", "NContract\NContract.csproj", "{072471A4-8980-4A7B-98B6-F502988634E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NContract.Nunit", "NContract\NContract.Nunit.csproj", "{072471A4-8980-4A7B-98B6-F502988634E1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentRestApi", "FluentRestApi\FluentRestApi.csproj", "{D16965D4-19D8-4A29-A88F-332E4EFA2946}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{D7A0F707-E4FA-42FC-B05A-A1EA8146ACA7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{5AF7809C-86C8-43D5-A432-5F2D121DB862}"
-EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D366F054-F97D-4C0B-B497-A804767EF98C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "Examples\WebApi\WebApi.csproj", "{D9F6FD10-9BA7-4F01-A0A9-5DD858956DBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.ContractTests", "Examples\WebApi.ContractTests\WebApi.ContractTests.csproj", "{9D1B804D-4839-4BF8-A849-A4BA8A8144BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.ContractTests", "Examples\WebApi.ContractTests\WebApi.ContractTests.csproj", "{9D1B804D-4839-4BF8-A849-A4BA8A8144BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		{D16965D4-19D8-4A29-A88F-332E4EFA2946}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D16965D4-19D8-4A29-A88F-332E4EFA2946}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D16965D4-19D8-4A29-A88F-332E4EFA2946}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5AF7809C-86C8-43D5-A432-5F2D121DB862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5AF7809C-86C8-43D5-A432-5F2D121DB862}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5AF7809C-86C8-43D5-A432-5F2D121DB862}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5AF7809C-86C8-43D5-A432-5F2D121DB862}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D366F054-F97D-4C0B-B497-A804767EF98C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D366F054-F97D-4C0B-B497-A804767EF98C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D366F054-F97D-4C0B-B497-A804767EF98C}.Release|Any CPU.ActiveCfg = Release|Any CPU

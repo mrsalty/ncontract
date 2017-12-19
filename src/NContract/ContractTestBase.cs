@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using NContract.FluentRestApi;
+using FluentRestApi;
 using NUnit.Framework;
 
-namespace NContract
+namespace NContract.Nunit
 {
     [TestFixture]
     public class ContractTestBase

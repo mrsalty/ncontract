@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 
-namespace NContract
+namespace NContract.Nunit
 {
     public sealed class Runner
     {
         private readonly List<ContractTestFixture> _contractTestFixtures;
 
-        public DateTime RunningTimeUtc { get; private set; }
+        public DateTime RunningTimeUtc { get; }
 
         public IReadOnlyCollection<ContractTestFixture> ContractTestFixtures => _contractTestFixtures.AsReadOnly();
 
