@@ -9,15 +9,15 @@ namespace NContract
     {
         private ContractTestFixture _contractTestFixture;
         private ContractTest _runningTest;
-        
-        [TestFixtureSetUp]
+
+        [OneTimeSetUp]
         public void Init()
         {
             _contractTestFixture = new ContractTestFixture();
             Runner.Instance.AppendFixture(_contractTestFixture);
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void Cleanup()
         {
             _contractTestFixture.TearDown();

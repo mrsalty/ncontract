@@ -5,16 +5,18 @@ using NContract;
 using NContract.FluentRestApi;
 using NUnit.Framework;
 
-namespace WebApi.Tests.Contract
+namespace WebApi.ContractTests
 {
     [TestFixture]
     public class PizzeriaContractTests : ContractTestBase
     {
+        private const string BaseUri = "http://localhost:32769";
+
         [Test]
         public void WhenIGetAllOrders_IShouldReceiveAListOfOrders()
         {
             var configureGet = new RestApiClientConfigurationBuilder()
-                .WithBaseUri("http://localhost:52730")
+                .WithBaseUri(BaseUri)
                 .WithRequestUri("/pizzeria/orders")
                 .WithContentType("application/json")
                 .WithHttpMethod(HttpMethod.Get)
@@ -40,7 +42,7 @@ namespace WebApi.Tests.Contract
             };
 
             var configurePost = new RestApiClientConfigurationBuilder()
-                  .WithBaseUri("http://localhost:52730")
+                  .WithBaseUri(BaseUri)
                   .WithRequestUri("/pizzeria/orders")
                   .WithContentType("application/json")
                   .WithModel(order)
@@ -68,7 +70,7 @@ namespace WebApi.Tests.Contract
             };
 
             var configurePost = new RestApiClientConfigurationBuilder()
-                  .WithBaseUri("http://localhost:52730")
+                  .WithBaseUri(BaseUri)
                   .WithRequestUri("/pizzeria/orders")
                   .WithContentType("application/json")
                   .WithModel(order)
@@ -90,7 +92,7 @@ namespace WebApi.Tests.Contract
             };
 
             var configurePut = new RestApiClientConfigurationBuilder()
-                  .WithBaseUri("http://localhost:52730")
+                  .WithBaseUri(BaseUri)
                   .WithRequestUri($"/pizzeria/orders/{orderId}")
                   .WithContentType("application/json")
                   .WithModel(updated)
@@ -103,7 +105,7 @@ namespace WebApi.Tests.Contract
 
             //Get order
             var configureGet = new RestApiClientConfigurationBuilder()
-                  .WithBaseUri("http://localhost:52730")
+                  .WithBaseUri(BaseUri)
                   .WithRequestUri($"/pizzeria/orders/{orderId}")
                   .WithContentType("application/json")
                   .WithModel(updated)
@@ -131,7 +133,7 @@ namespace WebApi.Tests.Contract
             };
 
             var configurePost = new RestApiClientConfigurationBuilder()
-                  .WithBaseUri("http://localhost:52730")
+                  .WithBaseUri(BaseUri)
                   .WithRequestUri("/pizzeria/orders")
                   .WithContentType("application/json")
                   .WithModel(order)
@@ -144,7 +146,7 @@ namespace WebApi.Tests.Contract
 
             //delete it
             var configureDelete = new RestApiClientConfigurationBuilder()
-                 .WithBaseUri("http://localhost:52730")
+                 .WithBaseUri(BaseUri)
                  .WithRequestUri($"/pizzeria/orders/{orderId}")
                  .WithContentType("application/json")
                  .WithHttpMethod(HttpMethod.Delete)

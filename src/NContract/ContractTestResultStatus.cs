@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 
 namespace NContract
 {
@@ -7,7 +8,8 @@ namespace NContract
         Failed,
         Inconcludent,
         Passed,
-        Skipped
+        Skipped,
+        Warning
     }
 
     public static class TestStatusExtensions
@@ -28,6 +30,9 @@ namespace NContract
                     break;
                 case TestStatus.Skipped:
                     contractTestResultStatus = ContractTestResultStatus.Skipped;
+                    break;
+                case TestStatus.Warning:
+                    contractTestResultStatus = ContractTestResultStatus.Warning;
                     break;
                 default:
                     contractTestResultStatus = ContractTestResultStatus.Inconcludent;

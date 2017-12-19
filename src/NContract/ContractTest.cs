@@ -51,7 +51,7 @@ namespace NContract
             RunningStatus = RunningStatus.Done;
             ExecutionTime = _stopwatch.Elapsed;
             _stopwatch.Reset();
-            ResultStatus = TestContext.CurrentContext.Result.Status.ToContractTestStatus();
+            ResultStatus = TestContext.CurrentContext.Result.Outcome.Status.ToContractTestStatus();
         }
 
 

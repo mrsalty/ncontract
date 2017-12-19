@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Threading.Tasks;
-using System.Web.Http;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using WebApi.Data;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.Domain;
 using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-    [RoutePrefix("pizzeria")]
-    public class PizzeriaController : ApiController
+    [Route("pizzeria")]
+    public class PizzeriaController : Controller
     {
         private readonly OrderService _orderService;
 
@@ -27,74 +21,38 @@ namespace WebApi.Controllers
 
         [Route("orders")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetOrders()
+        public async Task<IActionResult> GetOrders()
         {
             return Ok(await _orderService.GetOrderList());
         }
 
         [Route("orders")]
         [HttpPost]
-        public async Task<IHttpActionResult> Add([FromBody]AddOrderRequest request)
+        public async Task<IActionResult> Add([FromBody]AddOrderRequest request)
         {
-            try
-            {
-                var order = await _orderService.AddOrder(new Order(request.TableId, request.Pizzas));
-                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Created)
-                {
-                    Content = new ObjectContent(typeof(AddOrderReponse), order, new JsonMediaTypeFormatter()
-                    {
-                        Indent = true,
-                        SerializerSettings = new JsonSerializerSettings()
-                        {
-                            DateFormatString = "g",
-                            ContractResolver = new CamelCasePropertyNamesContractResolver()
-                        }
-                    })
-                });
-            }
-            catch (InvalidOperationException ioe)
-            {
-                return BadRequest(ioe.Message);
-            }
+            var order = await _orderService.AddOrder(new Order(request.TableId, request.Pizzas));
+            return Created(string.Empty, order);
         }
 
         [Route("orders/{id}")]
         [HttpGet]
-        public async Task<IHttpActionResult> Get(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            try
-            {
-                return Ok(await _orderService.GetOrderDetails(id));
-
-            }
-            catch (InvalidOperationException)
-            {
-                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.PreconditionFailed));
-            }
+            return Ok(await _orderService.GetOrderDetails(id));
         }
 
         [Route("orders/{id}")]
         [HttpPut]
-        public async Task<IHttpActionResult> Update([FromUri]Guid id, [FromBody]List<Pizza> pizzas)
+        public async Task<IActionResult> Update([FromQuery]Guid id, [FromBody]List<Pizza> pizzas)
         {
-            var updated = await _orderService.UpdateOrder(id, pizzas);
-
-            if (updated)
-                return Ok();
-
-            return ResponseMessage(new HttpResponseMessage(HttpStatusCode.PreconditionFailed));
+            return Ok(await _orderService.UpdateOrder(id, pizzas));
         }
 
         [Route("orders/{id}")]
         [HttpDelete]
-        public async Task<IHttpActionResult> Delete([FromUri]Guid id)
+        public async Task<IActionResult> Delete([FromQuery]Guid id)
         {
-            var deleted = await _orderService.DeleteOrder(id);
-
-            if (deleted)
-                return Ok();
-
-            return ResponseMessage(new HttpResponseMessage(HttpStatusCode.PreconditionFailed));
+            return Ok(await _orderService.DeleteOrder(id));
         }
 
         private async Task CreateSomeOrders()
