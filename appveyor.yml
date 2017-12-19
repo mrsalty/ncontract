@@ -2,9 +2,10 @@ version: 0.0.{build}
 before_build:
 - cmd: >-
     nuget restore .\src\NContract.sln
-build:
--  cmd: >-
-    nuget pack -Version %APPVEYOR_BUILD_VERSION%.
+nuget:  
+  disable_publish_on_pr: true
+build_script:  
+    - ps: .\build.ps1
 test: off
 deploy:
     provider: NuGet

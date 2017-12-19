@@ -5,7 +5,7 @@ using NContract;
 using NContract.FluentRestApi;
 using NUnit.Framework;
 
-namespace WebApi.ContractTests
+namespace WebApi.Test.Contract
 {
     [TestFixture]
     public class PizzeriaContractTests : ContractTestBase
