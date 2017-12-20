@@ -7,11 +7,11 @@ nuget:
 build_script:  
     - ps: .\build.ps1
 test: off
-deploy:
-  provider: NuGet
-  server:  https://www.nuget.org/profiles/mrsalty
-    api_key:   
-        secure: 2T4gTxXWE0LX2ogqrxte/aufaaluoOVKmuuzRiIeBfQoXSu6Q0gi+S6GVvPGskFm
-  skip_symbols: false
-  symbol_server:           # remove to push symbols to SymbolSource.org
-  artifact: /.*\.nupkg/
+ deploy:
+      provider: NuGet
+      api_key:    
+ -        secure: qa3c76wngnspqk6w0hsofy21
+      skip_symbols: false
+      symbol_server:           # remove to push symbols to SymbolSource.org
+      artifact: /.*\.nupkg/
+
