@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\NContract\NContract.Nunit.csproj" />
+    <ProjectReference Include="..\..\NContract.Nunit\NContract.Nunit.csproj" />
   </ItemGroup>
 
 </Project>
