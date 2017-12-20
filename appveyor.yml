@@ -9,7 +9,7 @@ build_script:
 test: off
 deploy:
   provider: NuGet
-  server:                  # remove to push to NuG
+  server:  https://www.nuget.org/profiles/mrsalty
     api_key:   
         secure: 2T4gTxXWE0LX2ogqrxte/aufaaluoOVKmuuzRiIeBfQoXSu6Q0gi+S6GVvPGskFm
   skip_symbols: false
