@@ -10,10 +10,15 @@ test: off
 deploy:
     provider: NuGet
     api_key:    
-        secure: qa3c76wngnspqk6w0hsofy21
+        secure: 2T4gTxXWE0LX2ogqrxte/aufaaluoOVKmuuzRiIeBfQoXSu6Q0gi+S6GVvPGskFm
     skip_symbols: false
     symbol_server:           # remove to push symbols to SymbolSource.org
     artifact: /.*\.nupkg/
-
-
+provider: NuGet
+  server:                  # remove to push to NuGet.org
+  api_key:
+    secure: m49OJ7+Jdt9an3jPcTukHA==
+  skip_symbols: false
+  symbol_server:           # remove to push symbols to SymbolSource.org
+  artifact: /.*\.nupkg/
 
