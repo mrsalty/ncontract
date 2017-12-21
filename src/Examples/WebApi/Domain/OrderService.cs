@@ -13,9 +13,6 @@ namespace WebApi.Domain
         {
             return await Task.Run(() =>
             {
-                if (InMemoryOrders.Instance.Any(o => o.TableId == order.TableId))
-                    throw new InvalidOperationException($"order already created for table with id {order.TableId}");
-
                  InMemoryOrders.Instance.Add(order);
 
                  return new AddOrderReponse
@@ -39,7 +36,7 @@ namespace WebApi.Domain
             });
         }
 
-        public async Task<GetOrderDetailsResponse> GetOrderDetails(Guid orderId)
+        public async Task<GetOrderDetailsResponse> GetOrder(Guid orderId)
         {
             return await Task.Run(() =>
             {
@@ -59,7 +56,7 @@ namespace WebApi.Domain
             });
         }
 
-        public async Task<bool> UpdateOrder(Guid orderId, List<Pizza> pizzas)
+        public async Task<bool> PutOrder(Guid orderId, List<Pizza> pizzas)
         {
             return await Task.Run(() =>
             {
@@ -68,7 +65,7 @@ namespace WebApi.Domain
                 if (order == null)
                     return false;
 
-                order.UpdatePizzas(pizzas);
+                order.Update(pizzas);
                 return true;
             });
         }

@@ -30,7 +30,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody]AddOrderRequest request)
         {
-            var order = await _orderService.AddOrder(new Order(request.TableId, request.Pizzas));
+            var order = await _orderService.AddOrder(new Order(request.Pizzas));
             return Created(string.Empty, order);
         }
 
@@ -38,39 +38,42 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(Guid id)
         {
-            return Ok(await _orderService.GetOrderDetails(id));
+            return Ok(await _orderService.GetOrder(id));
         }
 
         [Route("orders/{id}")]
         [HttpPut]
-        public async Task<IActionResult> Update([FromQuery]Guid id, [FromBody]List<Pizza> pizzas)
+        public async Task<IActionResult> Put([FromRoute]Guid id, [FromBody]List<Pizza> pizzas)
         {
-            return Ok(await _orderService.UpdateOrder(id, pizzas));
+            var response = await _orderService.PutOrder(id, pizzas);
+            if (response)
+                return Ok(true);
+            return NotFound(false);
         }
 
         [Route("orders/{id}")]
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromQuery]Guid id)
+        public async Task<IActionResult> Delete([FromRoute]Guid id)
         {
             return Ok(await _orderService.DeleteOrder(id));
         }
 
         private async Task CreateSomeOrders()
         {
-            await _orderService.AddOrder(new Order(Guid.NewGuid(), new List<Pizza>()
+            await _orderService.AddOrder(new Order(new List<Pizza>()
             {
                 new Pizza(PizzaType.Margherita),
                 new Pizza(PizzaType.Marinara)
             }));
 
-            await _orderService.AddOrder(new Order(Guid.NewGuid(), new List<Pizza>()
+            await _orderService.AddOrder(new Order(new List<Pizza>()
             {
                 new Pizza(PizzaType.Diavola),
                 new Pizza(PizzaType.QuattroStagioni),
                 new Pizza(PizzaType.Napoli)
             }));
 
-            await _orderService.AddOrder(new Order(Guid.NewGuid(), new List<Pizza>()
+            await _orderService.AddOrder(new Order(new List<Pizza>()
             {
                 new Pizza(PizzaType.Diavola),
                 new Pizza(PizzaType.Marinara),

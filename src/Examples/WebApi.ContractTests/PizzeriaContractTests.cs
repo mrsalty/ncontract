@@ -34,7 +34,6 @@ namespace WebApi.ContractTests
         {
             var order = new
             {
-                tableId = Guid.NewGuid().ToString(),
                 pizzas = new[]
                 {
                      new { pizzaType = "Margherita" },
@@ -62,7 +61,6 @@ namespace WebApi.ContractTests
             //post new order
             var order = new
             {
-                tableId = Guid.NewGuid().ToString(),
                 pizzas = new[]
                 {
                      new { pizzaType = "Margherita" },
@@ -124,7 +122,6 @@ namespace WebApi.ContractTests
             //create new order
             var order = new
             {
-                tableId = Guid.NewGuid().ToString(),
                 pizzas = new[]
                 {
                      new { pizzaType = "Margherita" },
