@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>.\src\NContract\NContract.csproj</id>
+    <id>NContract</id>
     <version>1.0.0</version>
     <authors>mrsalty</authors>
     <owners>mrsalty</owners>
