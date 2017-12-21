@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>NContract</id>
+        <version>0.0.1</version>
+        <description>NContract helps testing your Rest api contracts</description>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<copyright>Copyright 2017 (c) mrsalty. All rights reserved.</copyright>
+        <authors>mrsalty</authors>
+		<tags>contract testing</tags>
+    </metadata>
+	<files>
+		<file src=".\src\NContract.NUnit\bin\Debug\netcoreapp2.0\NContract.NUnit.dll" target="lib\netcore1.1" />
+	    <file src=".\src\NContract\bin\Debug\netcoreapp2.0\NContract.dll" target="lib\netcore2.0" />
+	</files>
+</package>
