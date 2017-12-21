@@ -6,7 +6,7 @@ With NContract you can hit your REST web api in a fluent manner and verify your 
 NContract generates an HTML report for each test run in the 'bin\NContract' folder of your test project so that you can integrate it in your CI build pipeline.
 
 ```C#
-	[TestFixture]
+[TestFixture]
     public class PizzeriaContractTests : ContractTestBase
     {
         [Test]
