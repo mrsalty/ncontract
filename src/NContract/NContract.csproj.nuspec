@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>.\src\NContract\NContract.csproj</id>
+    <version>1.0.0</version>
+    <authors>mrsalty</authors>
+    <owners>mrsalty</owners>
+    <projectUrl>https://github.com/mrsalty/ncontract</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>NContract helps testing your Rest api contracts</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>contract testing</tags>
+    <dependencies>
+      <dependency id="SampleDependency" version="1.0" />
+    </dependencies>
+  </metadata>
+</package>
