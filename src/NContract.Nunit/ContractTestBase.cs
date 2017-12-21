@@ -36,9 +36,9 @@ namespace NContract.Nunit
             _runningTest.TearDown();
         }
 
-        public Task<InvocationResult> InvokeApi(RestApiClientConfiguration configuration)
+        public async Task<InvocationResult> InvokeApiAsync(RestApiClientConfiguration configuration)
         {
-            return _runningTest.InvokeApi(configuration);
+            return await _runningTest.InvokeApiAsync(configuration);
         }
     }
 }

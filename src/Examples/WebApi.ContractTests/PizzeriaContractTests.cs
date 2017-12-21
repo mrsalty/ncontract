@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using NContract;
 using NContract.Nunit;
 using NUnit.Framework;
@@ -10,10 +11,10 @@ namespace WebApi.ContractTests
     [TestFixture]
     public class PizzeriaContractTests : ContractTestBase
     {
-        private const string BaseUri = "http://localhost:32770";
+        private const string BaseUri = "http://localhost:59210";
 
         [Test]
-        public void WhenIGetAllOrders_IShouldReceiveAListOfOrders()
+        public async Task WhenIGetAllOrders_IShouldReceiveAListOfOrders()
         {
             var configureGet = new RestApiClientConfigurationBuilder()
                 .WithBaseUri(BaseUri)
@@ -22,14 +23,14 @@ namespace WebApi.ContractTests
                 .WithHttpMethod(HttpMethod.Get)
                 .Build();
 
-            var invocationResult = InvokeApi(configureGet);
+            var invocationResult = await InvokeApiAsync(configureGet);
 
-            Assert.AreEqual(HttpStatusCode.OK, invocationResult.Result.HttpResponseMessage.StatusCode);
-            Assert.IsNotNull(invocationResult.Result.StringContent);
+            Assert.AreEqual(HttpStatusCode.OK, invocationResult.HttpResponseMessage.StatusCode);
+            Assert.IsNotNull(invocationResult.StringContent);
         }
 
         [Test]
-        public void WhenIOrder2Pizzas_ThenIShouldGetMyOrderId()
+        public async Task WhenIOrder2Pizzas_ThenIShouldGetMyOrderId()
         {
             var order = new
             {
@@ -49,14 +50,14 @@ namespace WebApi.ContractTests
                   .WithHttpMethod(HttpMethod.Post)
                   .Build();
 
-            var invocationResult = InvokeApi(configurePost);
+            var invocationResult = await InvokeApiAsync(configurePost);
 
-            Assert.AreEqual(HttpStatusCode.Created, invocationResult.Result.HttpResponseMessage.StatusCode);
-            Assert.DoesNotThrow(() => Guid.Parse(invocationResult.Result.StringContent.orderId.Value));
+            Assert.AreEqual(HttpStatusCode.Created, invocationResult.HttpResponseMessage.StatusCode);
+            Assert.DoesNotThrow(() => Guid.Parse(invocationResult.StringContent.orderId.Value));
         }
 
         [Test]
-        public void WhenIUpdateMyOrderTo3Pizzas_ThenIShouldGet3Pizzas()
+        public async Task WhenIUpdateMyOrderTo3Pizzas_ThenIShouldGet3Pizzas()
         {
             //post new order
             var order = new
@@ -77,10 +78,10 @@ namespace WebApi.ContractTests
                   .WithHttpMethod(HttpMethod.Post)
                   .Build();
 
-            var invocationResult = InvokeApi(configurePost);
+            var invocationResult = await InvokeApiAsync(configurePost);
 
-            Assert.AreEqual(HttpStatusCode.Created, invocationResult.Result.HttpResponseMessage.StatusCode);
-            var orderId = invocationResult.Result.StringContent.orderId.Value;
+            Assert.AreEqual(HttpStatusCode.Created, invocationResult.HttpResponseMessage.StatusCode);
+            var orderId = invocationResult.StringContent.orderId.Value;
             Assert.DoesNotThrow(() => Guid.Parse(orderId));
 
             //update order
@@ -99,9 +100,9 @@ namespace WebApi.ContractTests
                   .WithHttpMethod(HttpMethod.Put)
                   .Build();
 
-            invocationResult = InvokeApi(configurePut);
+            invocationResult = await InvokeApiAsync(configurePut);
 
-            Assert.AreEqual(HttpStatusCode.OK, invocationResult.Result.HttpResponseMessage.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, invocationResult.HttpResponseMessage.StatusCode);
 
             //Get order
             var configureGet = new RestApiClientConfigurationBuilder()
@@ -111,14 +112,14 @@ namespace WebApi.ContractTests
                   .WithHttpMethod(HttpMethod.Get)
                   .Build();
 
-            invocationResult = InvokeApi(configureGet);
+            invocationResult = await InvokeApiAsync(configureGet);
 
-            Assert.AreEqual(HttpStatusCode.OK, invocationResult.Result.HttpResponseMessage.StatusCode);
-            Assert.AreEqual(3, invocationResult.Result.StringContent.pizzas.Count);
+            Assert.AreEqual(HttpStatusCode.OK, invocationResult.HttpResponseMessage.StatusCode);
+            Assert.AreEqual(3, invocationResult.StringContent.pizzas.Count);
         }
 
         [Test]
-        public void WhenICancelMyOrder_ThenIShouldntGetAnyPizza()
+        public async Task WhenICancelMyOrder_ThenIShouldntGetAnyPizza()
         {
             //create new order
             var order = new
@@ -139,8 +140,8 @@ namespace WebApi.ContractTests
                   .WithHttpMethod(HttpMethod.Post)
                   .Build();
 
-            var invocationResult = InvokeApi(configurePost);
-            var orderId = invocationResult.Result.StringContent.orderId.Value;
+            var invocationResult = await InvokeApiAsync(configurePost);
+            var orderId = invocationResult.StringContent.orderId.Value;
             Assert.DoesNotThrow(() => Guid.Parse(orderId));
 
             //delete it
@@ -151,9 +152,9 @@ namespace WebApi.ContractTests
                  .WithHttpMethod(HttpMethod.Delete)
                  .Build();
 
-            invocationResult = InvokeApi(configureDelete);
+            invocationResult = await InvokeApiAsync(configureDelete);
 
-            Assert.AreEqual(HttpStatusCode.OK, invocationResult.Result.HttpResponseMessage.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, invocationResult.HttpResponseMessage.StatusCode);
         }
     }
 }

@@ -54,7 +54,7 @@ namespace NContract.Nunit
         }
 
 
-        public Task<InvocationResult> InvokeApi(RestApiClientConfiguration configuration)
+        public Task<InvocationResult> InvokeApiAsync(RestApiClientConfiguration configuration)
         {
             var restApiClient = new RestApiClient(configuration);
 
