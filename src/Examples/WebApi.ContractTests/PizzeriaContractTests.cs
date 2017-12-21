@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using FluentRestApi;
+using NContract;
 using NContract.Nunit;
 using NUnit.Framework;
 

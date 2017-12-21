@@ -2,7 +2,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace FluentRestApi
+namespace NContract
 {
     public class RestApiClient
     {

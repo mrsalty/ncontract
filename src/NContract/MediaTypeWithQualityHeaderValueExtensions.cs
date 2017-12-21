@@ -2,7 +2,7 @@ using System;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace FluentRestApi
+namespace NContract
 {
     public static class MediaTypeWithQualityHeaderValueExtensions
     {

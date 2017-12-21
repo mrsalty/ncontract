@@ -1,7 +1,7 @@
 using System.Net.Http;
 using System.Text;
 
-namespace FluentRestApi
+namespace NContract
 {
     public class RestApiClientConfiguration
     {

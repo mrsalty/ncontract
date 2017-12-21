@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\NContract.Nunit\NContract.Nunit.csproj" />
+    <ProjectReference Include="..\..\NContract\NContract.csproj" />
   </ItemGroup>
 
 </Project>

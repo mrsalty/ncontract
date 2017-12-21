@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using FluentRestApi;
 using Newtonsoft.Json;
 
 namespace NContract.Nunit
