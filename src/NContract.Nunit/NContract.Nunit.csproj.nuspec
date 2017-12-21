@@ -11,10 +11,8 @@
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>contract testing</tags>
-    <dependencies>
 	<files>
-		<file src=".\bin\Debug\netcoreapp2.0\NContract.NUnit.dll" target="lib\netcore2.0" />
+		<file src=".\bin\Debug\netcoreapp2.0\NContract.dll" target="lib\netcore2.0\" />
 	</files>
-    </dependencies>
   </metadata>
 </package>

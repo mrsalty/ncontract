@@ -1,18 +1,21 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>NContract</id>
-    <version>1.0.0</version>
-    <authors>mrsalty</authors>
-    <owners>mrsalty</owners>
-    <projectUrl>https://github.com/mrsalty/ncontract</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>NContract helps testing your Rest Api contracts and integrates with your CI builds.</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
-    <copyright>Copyright 2017</copyright>
-    <tags>contract testing</tags>
-    <dependencies>
-      <dependency id="SampleDependency" version="1.0" />
-    </dependencies>
-  </metadata>
+		<id>NContract</id>
+		<version>1.0.0</version>
+		<authors>mrsalty</authors>
+		<owners>mrsalty</owners>
+		<projectUrl>https://github.com/mrsalty/ncontract</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>NContract helps testing your Rest Api contracts and integrates with your CI builds.</description>
+		<copyright>Copyright 2017</copyright>
+		<tags>contract testing</tags>
+		<dependencies>
+			<dependency id="Newtonsoft.Json" version="10.0.3" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="..\NContract\bin\Debug\netcoreapp2.0\NContract.dll" target="lib\netcore2.0" />
+		<file src="..\NContract.Nunit\bin\Debug\netcoreapp2.0\NContract.Nunit.dll" target="lib\netcore2.0" />
+	</files>
 </package>

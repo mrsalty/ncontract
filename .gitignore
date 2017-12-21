@@ -81,3 +81,6 @@ src/scaffolding.config
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Nuget
+*.nupkg
