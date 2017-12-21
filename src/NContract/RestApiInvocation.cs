@@ -13,7 +13,7 @@ namespace NContract
         public RestApiInvocation(RestApiClientConfiguration restApiClientConfiguration)
         {
             _restApiClientConfiguration = restApiClientConfiguration;
-            _httpClientWrapper = new HttpClientWrapper(new HttpClientFactory());
+            _httpClientWrapper = new HttpClientWrapper();
         }
         
         public InvocationResult InvocationResult { get; private set; }
