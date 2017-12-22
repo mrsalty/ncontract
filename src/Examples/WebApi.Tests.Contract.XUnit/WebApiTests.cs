@@ -3,18 +3,18 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using NContract;
-using NContract.NUnit;
-using NUnit.Framework;
+using NContract.XUnit;
+using Xunit;
 
-namespace WebApi.ContractTests
+namespace WebApi.Tests.Contract.XUnit
 {
-    [TestFixture]
-    public class PizzeriaContractTests : RunContractTests
+    public class WebApiTests : RunContractTests
     {
         private const string BaseUri = "http://localhost:59210";
 
-        [Test]
-        public async Task WhenIGetAllOrders_IShouldReceiveAListOfOrders()
+        [Fact]
+        [ContractTest]
+        public async Task XUnit_WhenIGetAllOrders_IShouldReceiveAListOfOrders()
         {
             var configureGet = new RestApiClientConfigurationBuilder()
                 .WithBaseUri(BaseUri)
@@ -25,11 +25,11 @@ namespace WebApi.ContractTests
 
             var invocationResult = await InvokeApiAsync(configureGet);
 
-            Assert.AreEqual(HttpStatusCode.OK, invocationResult.HttpResponseMessage.StatusCode);
-            Assert.IsNotNull(invocationResult.StringContent);
+            Assert.Equal(HttpStatusCode.OK, invocationResult.HttpResponseMessage.StatusCode);
+            Assert.NotNull(invocationResult.StringContent);
         }
 
-        [Test]
+        [Fact]
         public async Task WhenIOrder2Pizzas_ThenIShouldGetMyOrderId()
         {
             var order = new
@@ -51,11 +51,11 @@ namespace WebApi.ContractTests
 
             var invocationResult = await InvokeApiAsync(configurePost);
 
-            Assert.AreEqual(HttpStatusCode.Created, invocationResult.HttpResponseMessage.StatusCode);
-            Assert.DoesNotThrow(() => Guid.Parse(invocationResult.StringContent.orderId.Value));
+            Assert.Equal(HttpStatusCode.Created, invocationResult.HttpResponseMessage.StatusCode);
+            Guid.Parse(invocationResult.StringContent.orderId.Value);
         }
 
-        [Test]
+        [Fact]
         public async Task WhenIUpdateMyOrderTo3Pizzas_ThenIShouldGet3Pizzas()
         {
             //post new order
@@ -78,9 +78,9 @@ namespace WebApi.ContractTests
 
             var invocationResult = await InvokeApiAsync(configurePost);
 
-            Assert.AreEqual(HttpStatusCode.Created, invocationResult.HttpResponseMessage.StatusCode);
+            Assert.Equal(HttpStatusCode.Created, invocationResult.HttpResponseMessage.StatusCode);
             var orderId = invocationResult.StringContent.orderId.Value;
-            Assert.DoesNotThrow(() => Guid.Parse(orderId));
+           Guid.Parse(orderId);
 
             //update order
             var updated = new[]
@@ -100,7 +100,7 @@ namespace WebApi.ContractTests
 
             invocationResult = await InvokeApiAsync(configurePut);
 
-            Assert.AreEqual(HttpStatusCode.OK, invocationResult.HttpResponseMessage.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, invocationResult.HttpResponseMessage.StatusCode);
 
             //Get order
             var configureGet = new RestApiClientConfigurationBuilder()
@@ -112,11 +112,11 @@ namespace WebApi.ContractTests
 
             invocationResult = await InvokeApiAsync(configureGet);
 
-            Assert.AreEqual(HttpStatusCode.OK, invocationResult.HttpResponseMessage.StatusCode);
-            Assert.AreEqual(3, invocationResult.StringContent.pizzas.Count);
+            Assert.Equal(HttpStatusCode.OK, invocationResult.HttpResponseMessage.StatusCode);
+            Assert.Equal(3, invocationResult.StringContent.pizzas.Count);
         }
 
-        [Test]
+        [Fact]
         public async Task WhenICancelMyOrder_ThenIShouldntGetAnyPizza()
         {
             //create new order
@@ -139,7 +139,7 @@ namespace WebApi.ContractTests
 
             var invocationResult = await InvokeApiAsync(configurePost);
             var orderId = invocationResult.StringContent.orderId.Value;
-            Assert.DoesNotThrow(() => Guid.Parse(orderId));
+            Guid.Parse(orderId);
 
             //delete it
             var configureDelete = new RestApiClientConfigurationBuilder()
@@ -151,7 +151,7 @@ namespace WebApi.ContractTests
 
             invocationResult = await InvokeApiAsync(configureDelete);
 
-            Assert.AreEqual(HttpStatusCode.OK, invocationResult.HttpResponseMessage.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, invocationResult.HttpResponseMessage.StatusCode);
         }
     }
 }

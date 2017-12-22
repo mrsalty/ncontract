@@ -28,7 +28,7 @@ namespace NContract
         public void TearDown()
         {
             RunningStatus = RunningStatus.Done;
-            Runner.Instance.WriteFixtureReport(Id);
+            ContractTestContext.Instance.WriteFixtureReport(Id);
         }
     }
 }

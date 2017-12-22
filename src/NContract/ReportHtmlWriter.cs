@@ -23,8 +23,8 @@ namespace NContract
 
         private void WriteHeader()
         {
-            string title = $"NContract report";
-            string reportHtml = $"<!DOCTYPE html><html><title>{title}</title><style>{Css()}</style><body>";
+            var title = $"NContract report";
+            var reportHtml = $"<!DOCTYPE html><html><title>{title}</title><style>{Css()}</style><body>";
             reportHtml += $"<h1>{title}</h1>";
             reportHtml += $"<p>Run at {_runnintTimeUtc:O}</p>";
             File.AppendAllText(_reportFileName, reportHtml);
@@ -32,7 +32,7 @@ namespace NContract
 
         public void WriteFixtureReport(Guid fixtureId)
         {
-            var fixture = Runner.Instance.ContractTestFixtures.SingleOrDefault(x => x.Id == fixtureId);
+            var fixture = ContractTestContext.Instance.ContractTestFixtures.SingleOrDefault(x => x.Id == fixtureId);
 
             if (fixture != null)
             {
