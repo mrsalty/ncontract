@@ -1,16 +1,7 @@
-﻿using NUnit.Framework.Interfaces;
+using NUnit.Framework.Interfaces;
 
-namespace NContract.Nunit
+namespace NContract.NUnit
 {
-    public enum ContractTestResultStatus
-    {
-        Failed,
-        Inconcludent,
-        Passed,
-        Skipped,
-        Warning
-    }
-
     public static class TestStatusExtensions
     {
         public static ContractTestResultStatus ToContractTestStatus(this TestStatus testStatus)
@@ -21,7 +12,7 @@ namespace NContract.Nunit
                 case TestStatus.Failed:
                     contractTestResultStatus = ContractTestResultStatus.Failed;
                     break;
-                    case TestStatus.Inconclusive:
+                case TestStatus.Inconclusive:
                     contractTestResultStatus = ContractTestResultStatus.Inconcludent;
                     break;
                 case TestStatus.Passed:

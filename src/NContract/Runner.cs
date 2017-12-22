@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 
-namespace NContract.Nunit
+namespace NContract
 {
     public sealed class Runner
     {
         private readonly List<ContractTestFixture> _contractTestFixtures;
 
-        public DateTime RunningTimeUtc { get; }
+        public DateTime RunTimeUtc { get; }
 
         public IReadOnlyCollection<ContractTestFixture> ContractTestFixtures => _contractTestFixtures.AsReadOnly();
 
@@ -21,9 +21,9 @@ namespace NContract.Nunit
 
         private Runner()
         {
-            RunningTimeUtc = DateTime.UtcNow;
+            RunTimeUtc = DateTime.UtcNow;
 
-            ReportTextWriter = new ReportHtmlWriter(RunningTimeUtc);
+            ReportTextWriter = new ReportHtmlWriter(RunTimeUtc);
 
             RunningStatus = RunningStatus.Started;
 

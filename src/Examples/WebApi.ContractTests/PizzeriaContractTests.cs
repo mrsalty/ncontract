@@ -3,13 +3,13 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using NContract;
-using NContract.Nunit;
+using NContract.NUnit;
 using NUnit.Framework;
 
 namespace WebApi.ContractTests
 {
     [TestFixture]
-    public class PizzeriaContractTests : ContractTestBase
+    public class PizzeriaContractTests : RunContractTests
     {
         private const string BaseUri = "http://localhost:59210";
 

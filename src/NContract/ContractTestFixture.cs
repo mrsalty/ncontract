@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 
-namespace NContract.Nunit
+namespace NContract
 {
     public class ContractTestFixture
     {
-        private readonly List<ContractTest> _contractTests;
+        private readonly List<ContractTestBase> _contractTests;
 
-        public IReadOnlyCollection<ContractTest> ContractTests => _contractTests.AsReadOnly();
+        public IReadOnlyCollection<ContractTestBase> ContractTests => _contractTests.AsReadOnly();
 
         public RunningStatus RunningStatus { get; set; }
 
@@ -17,10 +17,10 @@ namespace NContract.Nunit
         {
             Id = Guid.NewGuid();
             RunningStatus = RunningStatus.Started;
-            _contractTests = new List<ContractTest>();
+            _contractTests = new List<ContractTestBase>();
         }
 
-        public void AppendTest(ContractTest test)
+        public void AppendTest(ContractTestBase test)
         {
             _contractTests.Add(test);
         }

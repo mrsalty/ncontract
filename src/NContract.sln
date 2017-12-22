@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{D7A0F707-E4FA-42FC-B05A-A1EA8146ACA7}"
 EndProject
@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "Examples\WebApi\W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.ContractTests", "Examples\WebApi.ContractTests\WebApi.ContractTests.csproj", "{9D1B804D-4839-4BF8-A849-A4BA8A8144BF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NContract.Nunit", "NContract.Nunit\NContract.Nunit.csproj", "{3A979AAD-8D3A-4713-99B5-E302E54AAD67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NContract.NUnit", "NContract.Nunit\NContract.NUnit.csproj", "{3A979AAD-8D3A-4713-99B5-E302E54AAD67}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NContract", "NContract\NContract.csproj", "{BD38362B-7A3F-43CB-938C-5027980A89C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NContract.XUnit", "..\NContract.XUnit\NContract.XUnit.csproj", "{F6F95227-6BDF-4119-8406-C23085ECDC83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{BD38362B-7A3F-43CB-938C-5027980A89C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD38362B-7A3F-43CB-938C-5027980A89C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD38362B-7A3F-43CB-938C-5027980A89C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6F95227-6BDF-4119-8406-C23085ECDC83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6F95227-6BDF-4119-8406-C23085ECDC83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6F95227-6BDF-4119-8406-C23085ECDC83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6F95227-6BDF-4119-8406-C23085ECDC83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

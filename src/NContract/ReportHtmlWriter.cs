@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
-namespace NContract.Nunit
+namespace NContract
 {
     public class ReportHtmlWriter
     {
